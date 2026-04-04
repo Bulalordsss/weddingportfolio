@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import Navbar from "../components/navbar";
 import Hero from "../components/hero";
 import StorySection from "./(sections)/story-section";
-import VenueSection from "./(sections)/venue-section";
+import InfoSection from "./(sections)/info-section";
 import FaqSection from "./(sections)/faq-section";
 import RsvpSection from "./(sections)/rsvp-section";
 
@@ -48,7 +48,7 @@ export default function Home() {
 
       <Hero />
       <StorySection />
-      <VenueSection />
+      <InfoSection />
       <FaqSection />
       <RsvpSection />
     </div>

@@ -164,7 +164,7 @@ export function PolaroidFlickThrough({
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,#fff8ef_0%,#f7f0e6_45%,#f0e4d5_100%)]" />
         <div className="absolute left-1/2 top-12 h-72 w-72 -translate-x-1/2 rounded-full bg-white/40 blur-3xl" />
 
-        <div className="relative mx-auto flex w-full max-w-7xl flex-col px-5 pb-10 pt-32 sm:px-8 sm:py-12 lg:px-10">
+        <div className="relative mx-auto flex w-full max-w-7xl flex-col px-5 pb-10 pt-32 sm:px-8 sm:py-12 lg:px-10 lg:pt-40">
           <div className="mx-auto max-w-4xl text-center">
             <h2 className="font-serif text-4xl leading-none tracking-[-0.06em] text-[#34271f] sm:text-7xl lg:text-[7.5rem]">
               our love story

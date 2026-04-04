@@ -15,7 +15,7 @@ export default function Navbar({ hidden }: NavbarProps): ReactElement | null {
           className="text-sm font-semibold tracking-wide text-black/80 dark:text-black/80"
           aria-label="Joshua & Vien"
         >
-          Joshua &amp; Vien
+          J &amp; V
         </a>
 
         <div className="flex items-center gap-2 sm:gap-3">
@@ -26,10 +26,10 @@ export default function Navbar({ hidden }: NavbarProps): ReactElement | null {
             Story
           </a>
           <a
-            href="#venue"
+            href="#info"
             className="rounded-full px-3 py-1.5 text-xs font-medium text-black/60 transition-colors hover:text-black dark:text-black/60 dark:hover:text-black"
           >
-            Venue
+            Info
           </a>
           <a
             href="#faq"

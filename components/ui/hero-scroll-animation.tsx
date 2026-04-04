@@ -31,9 +31,11 @@ const Section1: React.FC<SectionProps> = ({ scrollYProgress }) => {
 
       {/* Hero text overlay */}
       <div className="pointer-events-none absolute inset-0 z-10">
-        <div className="absolute font-serif inset-x-0 top-[58%] -translate-y-1/2 px-6 text-center">
-          <h1 className="text-5xl font-semibold leading-[0.95] tracking-tight text-white/95 md:text-7xl">
-            JOSHUA &amp; VIEN
+        <div className="absolute inset-x-0 bottom-20 px-6 text-center font-serif md:bottom-24">
+          <h1 className="text-5xl font-semibold leading-[0.92] tracking-tight text-white/95 md:text-7xl">
+            <span className="block">JOSHUA</span>
+            <span className="block text-4xl leading-none md:text-6xl">&amp;</span>
+            <span className="block">VIEN</span>
           </h1>
         </div>
 
