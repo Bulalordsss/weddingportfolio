@@ -9,8 +9,8 @@ type TimelineItem = {
 };
 
 const TIMELINE: TimelineItem[] = [
-  { time: '4:00 PM', title: 'CHAPEL' },
-  { time: '4:30 PM', title: 'WEDDING CEREMONYi' },
+  { time: '4:00 PM', title: 'CALL TIME' },
+  { time: '4:30 PM', title: 'WEDDING CEREMONY' },
   { time: '6:00 PM', title: 'RECEPTION' },
   { time: '9:00 PM', title: 'CLOSING CEREMONY' },
 ];

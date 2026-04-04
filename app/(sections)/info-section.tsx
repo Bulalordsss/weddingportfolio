@@ -7,12 +7,14 @@ import { Counter } from '@/components/ui/animated-counter';
 
 import CountdownSection from './(subsections)/countdown-section';
 import VenueSection from './(subsections)/venue-section';
+import GeneralInfoSection from './(subsections)/general-info';
 
 export default function InfoSection() {
   return (
     <section id="info">
       <CountdownSection />
       <VenueSection />
+      <GeneralInfoSection />
     </section>
   );
 }
