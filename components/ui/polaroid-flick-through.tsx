@@ -3,6 +3,7 @@
 import * as React from 'react';
 import { motion, useMotionValueEvent, useScroll } from 'framer-motion';
 import Image from 'next/image';
+import { createPortal } from 'react-dom';
 
 // NOTE: Palette tokens (Elegant Matcha)
 const MATCHA = {
@@ -104,6 +105,7 @@ export function PolaroidFlickThrough({
   const containerRef = React.useRef<HTMLElement>(null);
   const [currentIndex, setCurrentIndex] = React.useState(0);
   const [activeCardId, setActiveCardId] = React.useState<string | null>(null);
+  const [isMounted, setIsMounted] = React.useState(false);
 
   const activeCard = React.useMemo(
     () => (activeCardId ? cards.find((c) => c.id === activeCardId) ?? null : null),
@@ -111,6 +113,10 @@ export function PolaroidFlickThrough({
   );
 
   const closeViewer = React.useCallback(() => setActiveCardId(null), []);
+
+  React.useEffect(() => {
+    setIsMounted(true);
+  }, []);
 
   React.useEffect(() => {
     if (!activeCard) return;
@@ -172,14 +178,14 @@ export function PolaroidFlickThrough({
       <div className="sticky top-0 flex min-h-screen overflow-hidden">
         <div className="absolute inset-0 bg-[#f1ebe1]" />
 
-        <div className="relative mx-auto flex w-full max-w-7xl flex-col px-5 pb-10 pt-32 sm:px-8 sm:py-12 lg:px-10 lg:pt-40">
+        <div className="relative mx-auto flex w-full max-w-7xl flex-col px-5 pb-8 pt-24 sm:px-8 sm:py-12 lg:px-10 lg:pt-40">
           <div className="mx-auto max-w-4xl text-center">
-            <h2 className="font-serif text-4xl leading-none tracking-[-0.06em] text-[#44624a] sm:text-7xl lg:text-[7.5rem]">
+            <h2 className="font-serif text-[3rem] leading-none tracking-[-0.06em] text-[#44624a] sm:text-7xl lg:text-[7.5rem]">
               our love story
             </h2>
           </div>
 
-          <div className="mt-5 flex flex-1 flex-col justify-center sm:mt-8 lg:mt-6">
+          <div className="mt-3 flex flex-1 flex-col justify-center sm:mt-8 lg:mt-6">
             <div className="grid items-center gap-4 sm:gap-8 lg:grid-cols-[280px_minmax(0,1fr)_280px] lg:gap-10">
               <div className="hidden lg:block">
                 {currentStage.align === 'left' ? (
@@ -191,7 +197,7 @@ export function PolaroidFlickThrough({
               </div>
 
               <div className="order-2 flex items-center justify-center lg:order-none">
-                <div className="relative h-[430px] w-full max-w-[280px] sm:h-[520px] sm:max-w-[420px] lg:h-[560px] lg:max-w-[460px]">
+                <div className="relative h-[360px] w-full max-w-[240px] sm:h-[520px] sm:max-w-[420px] lg:h-[560px] lg:max-w-[460px]">
                   {cards.map((card, index) => {
                     const state = getCardState(index, currentIndex);
                     const background =
@@ -200,7 +206,7 @@ export function PolaroidFlickThrough({
                     return (
                       <motion.figure
                         key={card.id}
-                        className="absolute left-1/2 top-1/2 w-[240px] -translate-x-1/2 -translate-y-1/2 rounded-[6px] border border-[#44624a]/15 bg-white p-2.5 shadow-[0_18px_45px_rgba(68,98,74,0.14)] sm:w-[280px] sm:p-3 lg:w-[330px]"
+                        className="absolute left-1/2 top-[43%] w-[212px] -translate-x-1/2 -translate-y-1/2 rounded-[6px] border border-[#44624a]/15 bg-white p-2 shadow-[0_18px_45px_rgba(68,98,74,0.14)] sm:top-1/2 sm:w-[280px] sm:p-3 lg:w-[330px]"
                         animate={state}
                         transition={{
                           type: 'spring',
@@ -251,8 +257,8 @@ export function PolaroidFlickThrough({
                               </div>
                             </div>
 
-                            <figcaption className="px-2 pb-1 pt-4 text-center">
-                              <p className="font-serif text-xl tracking-[-0.03em] text-[#44624a]">
+                            <figcaption className="px-2 pb-1 pt-3 text-center">
+                              <p className="font-serif text-[1.9rem] leading-none tracking-[-0.03em] text-[#44624a] sm:text-xl">
                                 {card.note}
                               </p>
                               <p className="mt-1 text-[10px] font-medium uppercase tracking-[0.28em] text-[#44624a]/55 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
@@ -277,7 +283,7 @@ export function PolaroidFlickThrough({
               </div>
             </div>
 
-            <div className="order-1 mx-auto mt-10 max-w-[18rem] px-2 pb-4 text-center sm:mt-6 sm:max-w-sm lg:hidden">
+            <div className="order-1 mx-auto mt-5 max-w-[18rem] px-2 pb-6 text-center sm:mt-6 sm:max-w-sm lg:hidden">
               <StageCopy
                 stage={currentStage}
                 stageNumber={currentStageIndex + 1}
@@ -287,7 +293,8 @@ export function PolaroidFlickThrough({
           </div>
         </div>
 
-        {activeCard ? (
+        {activeCard && isMounted
+          ? createPortal(
           <div
             role="dialog"
             aria-modal="true"
@@ -333,8 +340,10 @@ export function PolaroidFlickThrough({
                 </div>
               </div>
             </div>
-          </div>
-        ) : null}
+          </div>,
+          document.body,
+        )
+          : null}
       </div>
     </section>
   );

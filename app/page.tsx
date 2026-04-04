@@ -3,14 +3,24 @@
 import { useEffect, useState } from "react";
 import Navbar from "../components/navbar";
 import Hero from "../components/hero";
+import MailSection from "./(sections)/mail-section";
 import StorySection from "./(sections)/story-section";
 import InfoSection from "./(sections)/info-section";
 import FaqSection from "./(sections)/faq-section";
 import RsvpSection from "./(sections)/rsvp-section";
 
 export default function Home() {
+  const [isInvitationOpened, setIsInvitationOpened] = useState(false);
   const [hideNavbar, setHideNavbar] = useState(true);
   const [isPolaroidViewerOpen, setIsPolaroidViewerOpen] = useState(false);
+
+  useEffect(() => {
+    document.body.style.overflow = isInvitationOpened ? "" : "hidden";
+
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [isInvitationOpened]);
 
   useEffect(() => {
     const el = document.getElementById("hero");
@@ -42,9 +52,20 @@ export default function Home() {
       );
   }, []);
 
+  const handleOpenInvitation = () => {
+    setIsInvitationOpened(true);
+
+    window.setTimeout(() => {
+      const heroSection = document.getElementById("hero");
+      heroSection?.scrollIntoView({ behavior: "smooth", block: "start" });
+    }, 120);
+  };
+
   return (
     <div className="min-h-screen bg-zinc-50 font-sans dark:bg-white">
-      <Navbar hidden={hideNavbar || isPolaroidViewerOpen} />
+      <MailSection isOpen={isInvitationOpened} onOpen={handleOpenInvitation} />
+
+      <Navbar hidden={!isInvitationOpened || hideNavbar || isPolaroidViewerOpen} />
 
       <Hero />
       <StorySection />
