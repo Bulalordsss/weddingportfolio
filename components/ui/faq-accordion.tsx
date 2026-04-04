@@ -19,7 +19,7 @@ export function FaqAccordion({
   const [openIndex, setOpenIndex] = React.useState<number | null>(0);
 
   return (
-    <div className={cn('divide-y divide-[#34271f]/10', className)}>
+    <div className={cn('divide-y divide-[#44624a]/15', className)}>
       {items.map((item, idx) => {
         const open = openIndex === idx;
         return (
@@ -30,13 +30,13 @@ export function FaqAccordion({
               onClick={() => setOpenIndex((prev) => (prev === idx ? null : idx))}
               aria-expanded={open}
             >
-              <span className="text-[15px] font-medium leading-snug text-[#34271f]">
+              <span className="text-[15px] font-medium leading-snug text-[#44624a]">
                 {item.question}
               </span>
               <span
                 aria-hidden="true"
                 className={cn(
-                  'mt-1 inline-flex h-6 w-6 flex-none items-center justify-center rounded-full border border-[#34271f]/15 text-[#34271f]/70 transition-transform',
+                  'mt-1 inline-flex h-6 w-6 flex-none items-center justify-center rounded-full border border-[#44624a]/20 text-[#44624a]/70 transition-transform',
                   open ? 'rotate-45' : 'rotate-0',
                 )}
               >
@@ -51,7 +51,7 @@ export function FaqAccordion({
               )}
             >
               <div className="min-h-0">
-                <div className="mt-3 max-w-xl whitespace-pre-line text-sm leading-relaxed text-[#34271f]/75">
+                <div className="mt-3 max-w-xl whitespace-pre-line text-sm leading-relaxed text-[#44624a]/75">
                   {item.answer}
                 </div>
               </div>

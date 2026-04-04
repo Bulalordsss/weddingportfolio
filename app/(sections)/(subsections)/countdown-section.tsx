@@ -7,7 +7,7 @@ import { Counter } from '@/components/ui/animated-counter';
 
 export default function CountdownSection() {
   const ref = React.useRef<HTMLElement>(null);
-  // Reveal later (section mostly in view) so the fade doesn't happen too early while scrolling.
+  // Keep animations, but do not fade the section's background.
   const inView = useInView(ref, { amount: 0.75, once: false });
 
   const targetDate = React.useMemo(() => {
@@ -34,46 +34,32 @@ export default function CountdownSection() {
   return (
     <section
       ref={ref}
-      className="relative flex min-h-[100svh] items-center overflow-hidden bg-transparent text-[#34271f]"
+      className="relative flex min-h-[100svh] items-center overflow-hidden bg-[#f1ebe1] text-[#44624a]"
       aria-label="Countdown"
     >
-      {/* match story section glow */}
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top,#fff8ef_0%,#f7f0e6_45%,#f0e4d5_100%)]"
-      />
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute left-1/2 top-12 h-72 w-72 -translate-x-1/2 rounded-full bg-white/40 blur-3xl"
-      />
-
       {/* subtle paper speckles */}
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute inset-0 opacity-[0.18] mix-blend-multiply"
+        className="pointer-events-none absolute inset-0 opacity-[0.12] mix-blend-multiply"
         style={{
           backgroundImage:
-            'radial-gradient(rgba(52,39,31,0.22) 1px, transparent 1px)',
+            'radial-gradient(rgba(68,98,74,0.22) 1px, transparent 1px)',
           backgroundSize: '18px 18px',
         }}
       />
 
       <motion.div
         className="container relative mx-auto px-6 py-24"
-        initial={{ opacity: 0, y: 26, scale: 0.98 }}
-        animate={
-          inView
-            ? { opacity: 1, y: 0, scale: 1 }
-            : { opacity: 0, y: 26, scale: 0.98 }
-        }
-        transition={{ duration: 1.1, ease: [0.2, 0.75, 0.2, 1] }}
+        initial={{ opacity: 1, y: 0, scale: 1 }}
+        animate={{ opacity: 1, y: 0, scale: 1 }}
+        transition={{ duration: 0.0 }}
       >
         <div className="mx-auto max-w-5xl text-center">
-          <p className="font-serif text-2xl tracking-[-0.04em] text-[#3c2d24]/70 sm:text-3xl">
+          <p className="font-serif text-2xl tracking-[-0.04em] text-[#44624a]/70 sm:text-3xl">
             so please join us...
           </p>
 
-          <h2 className="mt-6 font-serif text-6xl leading-[0.9] tracking-[-0.06em] text-[#34271f] sm:text-7xl lg:text-[6.8rem]">
+          <h2 className="mt-6 font-serif text-6xl leading-[0.9] tracking-[-0.06em] text-[#44624a] sm:text-7xl lg:text-[6.8rem]">
             april 15, 2026
           </h2>
 

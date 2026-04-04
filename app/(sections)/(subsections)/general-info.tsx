@@ -112,11 +112,11 @@ export default function GeneralInfoSection() {
     <section
       id="general-info"
       aria-label="General information"
-      className="bg-[#f7f0e6] py-20 text-[#34271f]"
+      className="bg-[#f1ebe1] py-20 text-[#44624a]"
     >
       <div className="container mx-auto px-6">
         <div className="mx-auto max-w-5xl text-center">
-          <p className="font-serif text-2xl tracking-[-0.04em] text-[#3c2d24]/70 sm:text-3xl">
+          <p className="font-serif text-2xl tracking-[-0.04em] text-[#44624a]/75 sm:text-3xl">
             and now some additional details...
           </p>
         </div>
@@ -153,13 +153,13 @@ export default function GeneralInfoSection() {
         title={active?.details.title}
       >
         {active ? (
-          <div className="text-[#34271f]">
-            <p className="text-sm leading-relaxed text-[#34271f]/80">
+          <div className="text-[#44624a]">
+            <p className="text-sm leading-relaxed text-[#44624a]/80">
               {active.details.body}
             </p>
 
             {active.details.bullets?.length ? (
-              <ul className="mt-4 list-disc space-y-2 pl-5 text-sm text-[#34271f]/80">
+              <ul className="mt-4 list-disc space-y-2 pl-5 text-sm text-[#44624a]/80">
                 {active.details.bullets.map((b) => (
                   <li key={b}>{b}</li>
                 ))}
@@ -170,7 +170,7 @@ export default function GeneralInfoSection() {
               <button
                 type="button"
                 onClick={() => setOpen(false)}
-                className="rounded-full bg-[#34271f] px-6 py-2 text-xs font-semibold tracking-[0.22em] text-[#f7f0e6]"
+                className="rounded-full bg-[#44624a] px-6 py-2 text-xs font-semibold tracking-[0.22em] text-[#f1ebe1]"
               >
                 CLOSE
               </button>

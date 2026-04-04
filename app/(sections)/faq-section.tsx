@@ -60,15 +60,15 @@ export default function FaqSection() {
 		<section
 			id="faq"
 			aria-label="Questions and answers"
-			className="relative overflow-hidden bg-[#f7f0e6] text-[#34271f]"
+			className="relative overflow-hidden bg-[#f1ebe1] text-[#44624a]"
 		>
 			{/* background texture to match other sections */}
 			<div
 				aria-hidden="true"
-				className="pointer-events-none absolute inset-0 opacity-[0.18] mix-blend-multiply"
+				className="pointer-events-none absolute inset-0 opacity-[0.12] mix-blend-multiply"
 				style={{
 					backgroundImage:
-						'radial-gradient(rgba(52,39,31,0.22) 1px, transparent 1px)',
+						'radial-gradient(rgba(68,98,74,0.22) 1px, transparent 1px)',
 					backgroundSize: '18px 18px',
 				}}
 			/>
@@ -78,7 +78,7 @@ export default function FaqSection() {
 					<div className="flex flex-col gap-12 lg:flex-row lg:items-start lg:gap-16">
 						{/* Left: Hero copy */}
 						<div className="lg:w-[360px] lg:flex-none lg:pt-6">
-							<h2 className="font-serif text-5xl leading-[0.95] tracking-[-0.06em] sm:text-6xl">
+							<h2 className="font-serif text-5xl leading-[0.95] tracking-[-0.06em] sm:text-6xl text-[#44624a]">
 								Questions
 								<br />
 								and
@@ -86,12 +86,12 @@ export default function FaqSection() {
 								answers
 							</h2>
 
-							<p className="mt-6 max-w-sm text-sm leading-relaxed text-[#34271f]/70">
+							<p className="mt-6 max-w-sm text-sm leading-relaxed text-[#44624a]/75">
 								Can’t find the answer here?
 								<br />
 								<a
 									href="#rsvp"
-									className="underline decoration-[#34271f]/30 underline-offset-4 hover:decoration-[#34271f]/60"
+									className="underline decoration-[#44624a]/30 underline-offset-4 hover:decoration-[#44624a]/60"
 								>
 									Reach out to us
 								</a>
@@ -100,7 +100,7 @@ export default function FaqSection() {
 
 						{/* Right: Scrollable list on desktop; normal flow on mobile */}
 						<div className="min-w-0 flex-1">
-							<div className="rounded-2xl bg-white/35 px-6 py-2 shadow-[0_18px_50px_rgba(52,39,31,0.10)] ring-1 ring-[#34271f]/10">
+							<div className="rounded-2xl bg-white/30 px-6 py-2 shadow-[0_18px_50px_rgba(68,98,74,0.10)] ring-1 ring-[#44624a]/15">
 								<div className="lg:max-h-[520px] lg:overflow-auto lg:pr-2">
 									<FaqAccordion items={FAQS} />
 								</div>

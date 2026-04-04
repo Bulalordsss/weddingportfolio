@@ -56,6 +56,8 @@ const Section2: React.FC<SectionProps> = ({ scrollYProgress }) => {
   const scale = useTransform(scrollYProgress, [0, 1], [0.8, 1]);
   const rotate = useTransform(scrollYProgress, [0, 1], [5, 0]);
 
+  const words = ['WE', 'ARE', 'GETTING', 'MARRIED'] as const;
+
   const images = [
     { src: '/hero2.jpg', rotate: '-rotate-6', offset: 'translate-y-2' },
     { src: '/hero3.jpg', rotate: 'rotate-3', offset: '-translate-y-4' },
@@ -95,8 +97,10 @@ const Section2: React.FC<SectionProps> = ({ scrollYProgress }) => {
                     className="object-cover transition-transform duration-500 group-hover:scale-[1.03]"
                   />
                 </div>
-                <figcaption className="mt-3 h-6 text-center text-xs font-medium tracking-wide text-black/70">
-                  {/* caption space */}
+                <figcaption className="mt-3 text-center font-serif">
+                  <span className="text-[11px] font-semibold tracking-[0.28em] text-black/70">
+                    {words[idx]}
+                  </span>
                 </figcaption>
               </figure>
             ))}
