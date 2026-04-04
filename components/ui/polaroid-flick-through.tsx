@@ -170,8 +170,7 @@ export function PolaroidFlickThrough({
       className={`relative h-[420vh] bg-[${MATCHA.cream}] ${className}`}
     >
       <div className="sticky top-0 flex min-h-screen overflow-hidden">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,#ffffff_0%,#f1ebe1_55%,#c0cfb2_120%)]" />
-        <div className="absolute left-1/2 top-12 h-72 w-72 -translate-x-1/2 rounded-full bg-[#c0cfb2]/25 blur-3xl" />
+        <div className="absolute inset-0 bg-[#f1ebe1]" />
 
         <div className="relative mx-auto flex w-full max-w-7xl flex-col px-5 pb-10 pt-32 sm:px-8 sm:py-12 lg:px-10 lg:pt-40">
           <div className="mx-auto max-w-4xl text-center">
