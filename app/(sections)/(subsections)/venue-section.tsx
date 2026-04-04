@@ -52,10 +52,6 @@ export default function VenueSection() {
                     height={700}
                     priority
                     className="h-auto w-full object-contain"
-                    onError={() => {
-                      // eslint-disable-next-line no-console
-                      console.error('Failed to load venue image: /samplevenue.jpg');
-                    }}
                   />
                 </div>
               </div>
