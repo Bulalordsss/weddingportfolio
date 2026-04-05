@@ -1,30 +1,62 @@
-'use client';
+"use client";
 
-import * as React from 'react';
+import { RsvpPayload } from "@/types/rsvp";
+import * as React from "react";
+import { toast } from "sonner";
 
 export default function RsvpSection() {
-  const [primaryName, setPrimaryName] = React.useState('');
+  const [primaryName, setPrimaryName] = React.useState("");
   const [plusOnes, setPlusOnes] = React.useState<string[]>([]);
-  const [note, setNote] = React.useState('');
+  const [note, setNote] = React.useState("");
   const [submitted, setSubmitted] = React.useState(false);
 
-  const addPlusOne = () => setPlusOnes((prev) => [...prev, '']);
+  const addPlusOne = () => setPlusOnes((prev) => [...prev, ""]);
   const removePlusOne = (index: number) =>
     setPlusOnes((prev) => prev.filter((_, i) => i !== index));
 
   const updatePlusOne = (index: number, value: string) =>
     setPlusOnes((prev) => prev.map((v, i) => (i === index ? value : v)));
 
-  const onSubmit = (e: React.FormEvent) => {
+  const onSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setSubmitted(true);
 
-    // Hook up to your backend / Google Form later.
-    // eslint-disable-next-line no-console
-    console.log({ primaryName, plusOnes, note });
+    const payload: RsvpPayload = {
+      primaryName: primaryName.trim(),
+      plusOnes: plusOnes.map((name) => name.trim()).filter(Boolean),
+      notes: note.trim(),
+    };
+
+    const loading = toast.loading("Submitting RSVP...");
+
+    try {
+      const res = await fetch("/api/rsvp", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+      });
+
+      const data = await res.json();
+
+      toast.dismiss(loading);
+
+      if (!res.ok || !data.ok) {
+        toast.error(data?.error || "Failed to submit RSVP");
+        return;
+      }
+
+      toast.success("RSVP submitted!");
+      setSubmitted(true);
+      setPrimaryName("");
+      setPlusOnes([]);
+      setNote("");
+    } catch (err) {
+      toast.dismiss(loading);
+      toast.error("Network error while submitting RSVP");
+      console.error(err);
+    }
   };
 
-  const deadline = 'April 10, 2026';
+  const deadline = "April 10, 2026";
 
   return (
     <section
@@ -37,8 +69,8 @@ export default function RsvpSection() {
         className="pointer-events-none absolute inset-0 opacity-[0.12] mix-blend-multiply"
         style={{
           backgroundImage:
-            'radial-gradient(rgba(68,98,74,0.22) 1px, transparent 1px)',
-          backgroundSize: '18px 18px',
+            "radial-gradient(rgba(68,98,74,0.22) 1px, transparent 1px)",
+          backgroundSize: "18px 18px",
         }}
       />
 
@@ -53,7 +85,8 @@ export default function RsvpSection() {
               <p className="mt-6 max-w-sm text-sm leading-relaxed text-[#44624a]/75">
                 Please submit your RSVP on or before
                 <br />
-                <span className="font-semibold text-[#44624a]">{deadline}</span>.
+                <span className="font-semibold text-[#44624a]">{deadline}</span>
+                .
               </p>
 
               <p className="mt-4 max-w-sm text-sm leading-relaxed text-[#44624a]/75">
@@ -99,7 +132,9 @@ export default function RsvpSection() {
                           <div key={idx} className="flex items-center gap-3">
                             <input
                               value={value}
-                              onChange={(e) => updatePlusOne(idx, e.target.value)}
+                              onChange={(e) =>
+                                updatePlusOne(idx, e.target.value)
+                              }
                               placeholder={`Plus one #${idx + 1} name`}
                               className="w-full rounded-xl border border-[#44624a]/15 bg-white/60 px-4 py-3 text-sm text-[#44624a] outline-none placeholder:text-[#44624a]/35 focus:border-[#44624a]/30"
                             />
@@ -136,15 +171,9 @@ export default function RsvpSection() {
                   </div>
 
                   <div className="flex items-center justify-between gap-4">
-                    {submitted ? (
-                      <p className="text-sm text-[#44624a]/75">
-                        Submitted! (Currently logging to console)
-                      </p>
-                    ) : (
-                      <p className="text-sm text-[#44624a]/55">
-                        We can’t wait to celebrate with you.
-                      </p>
-                    )}
+                    <p className="text-sm text-[#44624a]/55">
+                      We can’t wait to celebrate with you.
+                    </p>
 
                     <button
                       type="submit"
