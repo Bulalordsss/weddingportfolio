@@ -7,25 +7,23 @@ import { Counter } from '@/components/ui/animated-counter';
 
 export default function CountdownSection() {
   const ref = React.useRef<HTMLElement>(null);
-  // Keep animations, but do not fade the section's background.
-  const inView = useInView(ref, { amount: 0.75, once: false });
+  useInView(ref, { amount: 0.75, once: false });
 
-  const targetDate = React.useMemo(() => {
-    const now = new Date();
-    const year = now.getUTCFullYear();
-    const target = new Date(Date.UTC(year, 3, 15, 0, 0, 0)); // April is month 3 (0-based)
-    return target.getTime() < now.getTime()
-      ? new Date(Date.UTC(year + 1, 3, 15, 0, 0, 0))
-      : target;
-  }, []);
+  const targetDate = React.useMemo(() => new Date(Date.UTC(2026, 3, 15, 0, 0, 0)), []);
 
   const [remaining, setRemaining] = React.useState(() =>
-    getTimeParts(targetDate.getTime() - Date.now()),
+    getTimeParts(targetDate.getTime() - targetDate.getTime()),
   );
 
   React.useEffect(() => {
-    const id = window.setInterval(() => {
+    const updateRemaining = () => {
       setRemaining(getTimeParts(targetDate.getTime() - Date.now()));
+    };
+
+    updateRemaining();
+
+    const id = window.setInterval(() => {
+      updateRemaining();
     }, 1000);
 
     return () => window.clearInterval(id);
@@ -92,11 +90,10 @@ function CountdownStat({
   value: number;
   pad: boolean;
 }) {
-  // Animate from previous -> next so ticking seconds remain readable.
-  const prevRef = React.useRef(value);
-  const prev = prevRef.current;
+  const [previousValue, setPreviousValue] = React.useState(value);
+
   React.useEffect(() => {
-    prevRef.current = value;
+    setPreviousValue((current) => (current === value ? current : value));
   }, [value]);
 
   const formatted = pad ? String(value).padStart(2, '0') : String(value);
@@ -105,7 +102,7 @@ function CountdownStat({
     <div className="min-w-[78px] text-center">
       <div className="relative mx-auto inline-block">
         <Counter
-          start={Math.max(0, prev)}
+          start={Math.max(0, previousValue)}
           end={Math.max(0, value)}
           duration={0.9}
           className="justify-center px-0 text-[#34271f]"

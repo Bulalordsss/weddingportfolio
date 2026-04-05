@@ -55,21 +55,21 @@ function getCardState(cardIndex: number, currentIndex: number) {
   if (distance > 1) {
     return {
       opacity: 0,
-      x: distance % 2 === 0 ? 110 : -110,
-      y: 140,
-      rotate: ROTATIONS[cardIndex] + (distance % 2 === 0 ? 8 : -8),
-      scale: 0.9,
+      x: distance % 2 === 0 ? 96 : -96,
+      y: 54,
+      rotate: ROTATIONS[cardIndex] * 0.4 + (distance % 2 === 0 ? 3 : -3),
+      scale: 0.94,
       zIndex: 0,
     };
   }
 
   if (distance === 1) {
     return {
-      opacity: 0.72,
-      x: 28,
-      y: 58,
-      rotate: ROTATIONS[cardIndex],
-      scale: 0.965,
+      opacity: 0.8,
+      x: 18,
+      y: 28,
+      rotate: ROTATIONS[cardIndex] * 0.55,
+      scale: 0.975,
       zIndex: 20,
     };
   }
@@ -88,11 +88,11 @@ function getCardState(cardIndex: number, currentIndex: number) {
   const depth = clamp(revealedDepth, 1, 8);
 
   return {
-    opacity: clamp(1 - depth * 0.1, 0.24, 1),
-    x: depth % 2 === 0 ? -depth * 2 : depth * 2,
-    y: -depth * 14,
-    rotate: ROTATIONS[cardIndex] * 0.45,
-    scale: 1 - depth * 0.026,
+    opacity: clamp(1 - depth * 0.12, 0.2, 1),
+    x: depth * 6,
+    y: -depth * 10,
+    rotate: ROTATIONS[cardIndex] * 0.18,
+    scale: 1 - depth * 0.018,
     zIndex: 30 - depth,
   };
 }
@@ -178,15 +178,23 @@ export function PolaroidFlickThrough({
       <div className="sticky top-0 flex min-h-screen overflow-hidden">
         <div className="absolute inset-0 bg-[#f1ebe1]" />
 
-        <div className="relative mx-auto flex w-full max-w-7xl flex-col px-5 pb-8 pt-24 sm:px-8 sm:py-12 lg:px-10 lg:pt-40">
+        <div className="relative mx-auto flex w-full max-w-7xl flex-col px-5 pb-8 pt-24 sm:px-8 sm:py-12 lg:px-10 lg:pt-32">
           <div className="mx-auto max-w-4xl text-center">
-            <h2 className="font-serif text-[3rem] leading-none tracking-[-0.06em] text-[#44624a] sm:text-7xl lg:text-[7.5rem]">
+            <h2 className="font-serif text-[3rem] leading-none tracking-[-0.06em] text-[#44624a] sm:text-7xl lg:text-[7.2rem]">
               our love story
             </h2>
           </div>
 
-          <div className="mt-3 flex flex-1 flex-col justify-center sm:mt-8 lg:mt-6">
-            <div className="grid items-center gap-4 sm:gap-8 lg:grid-cols-[280px_minmax(0,1fr)_280px] lg:gap-10">
+          <div className="mt-3 flex flex-1 flex-col sm:mt-8 lg:mt-6 lg:justify-center">
+            <div className="mx-auto mb-4 max-w-[20rem] px-2 text-center sm:mb-6 sm:max-w-xl lg:hidden">
+              <StageCopy
+                stage={currentStage}
+                stageNumber={currentStageIndex + 1}
+                compact
+              />
+            </div>
+
+            <div className="grid items-start gap-4 sm:gap-8 lg:grid-cols-[300px_minmax(0,1fr)_300px] lg:gap-10">
               <div className="hidden lg:block">
                 {currentStage.align === 'left' ? (
                   <StageCopy
@@ -196,8 +204,8 @@ export function PolaroidFlickThrough({
                 ) : null}
               </div>
 
-              <div className="order-2 flex items-center justify-center lg:order-none">
-                <div className="relative h-[360px] w-full max-w-[240px] sm:h-[520px] sm:max-w-[420px] lg:h-[560px] lg:max-w-[460px]">
+              <div className="order-2 flex items-center justify-center pt-2 lg:order-none lg:pt-10">
+                <div className="relative h-[250px] w-full max-w-[330px] sm:h-[330px] sm:max-w-[500px] lg:h-[390px] lg:max-w-[620px]">
                   {cards.map((card, index) => {
                     const state = getCardState(index, currentIndex);
                     const background =
@@ -206,7 +214,7 @@ export function PolaroidFlickThrough({
                     return (
                       <motion.figure
                         key={card.id}
-                        className="absolute left-1/2 top-[43%] w-[212px] -translate-x-1/2 -translate-y-1/2 rounded-[6px] border border-[#44624a]/15 bg-white p-2 shadow-[0_18px_45px_rgba(68,98,74,0.14)] sm:top-1/2 sm:w-[280px] sm:p-3 lg:w-[330px]"
+                        className="absolute left-1/2 top-1/2 w-[292px] -translate-x-1/2 -translate-y-1/2 rounded-[10px] border border-[#44624a]/10 bg-white p-2.5 shadow-[0_18px_45px_rgba(68,98,74,0.14)] sm:w-[430px] sm:p-3 lg:w-[520px]"
                         animate={state}
                         transition={{
                           type: 'spring',
@@ -227,28 +235,28 @@ export function PolaroidFlickThrough({
                             transition={{ type: 'spring', stiffness: 260, damping: 18 }}
                             className="rounded-[4px]"
                           >
-                            <div className="rounded-[3px] bg-[#f1ebe1] p-2 transition-shadow duration-300 group-hover:shadow-[0_14px_36px_rgba(68,98,74,0.18)]">
-                              <div className="relative aspect-[4/5] overflow-hidden rounded-[2px] bg-[#c0cfb2]/35">
+                            <div className="rounded-[8px] bg-[#f7f2ea] p-2.5 transition-shadow duration-300 group-hover:shadow-[0_14px_36px_rgba(68,98,74,0.18)] sm:p-3">
+                              <div className="relative aspect-[16/10] overflow-hidden rounded-[5px] bg-[#c0cfb2]/35">
                                 {card.imageSrc ? (
                                   <Image
                                     src={card.imageSrc}
                                     alt={card.alt ?? card.title}
                                     fill
-                                    sizes="(max-width: 640px) 280px, 330px"
+                                    sizes="(max-width: 640px) 292px, (max-width: 1024px) 430px, 520px"
                                     className="object-cover"
                                   />
                                 ) : (
                                   <div
-                                    className={`flex h-full w-full flex-col justify-between bg-gradient-to-br ${background} p-5 text-[#44624a]`}
+                                    className={`flex h-full w-full flex-col justify-between bg-gradient-to-br ${background} p-4 text-[#44624a] sm:p-5`}
                                   >
                                     <span className="text-[0.65rem] font-medium uppercase tracking-[0.3em] text-[#44624a]/65">
                                       Stage {card.stage}
                                     </span>
                                     <div>
-                                      <p className="font-serif text-2xl leading-none tracking-[-0.04em]">
+                                      <p className="font-serif text-[1.7rem] leading-none tracking-[-0.04em] sm:text-2xl">
                                         {card.title}
                                       </p>
-                                      <p className="mt-3 max-w-[16ch] text-sm leading-relaxed text-[#44624a]/70">
+                                      <p className="mt-2 max-w-[22ch] text-xs leading-relaxed text-[#44624a]/70 sm:mt-3 sm:text-sm">
                                         Photo placeholder
                                       </p>
                                     </div>
@@ -257,8 +265,8 @@ export function PolaroidFlickThrough({
                               </div>
                             </div>
 
-                            <figcaption className="px-2 pb-1 pt-3 text-center">
-                              <p className="font-serif text-[1.9rem] leading-none tracking-[-0.03em] text-[#44624a] sm:text-xl">
+                            <figcaption className="px-2 pb-1 pt-3 text-center sm:pt-4">
+                              <p className="font-sans text-[10px] font-semibold uppercase tracking-[0.18em] text-[#44624a]/70 sm:text-[11px]">
                                 {card.note}
                               </p>
                               <p className="mt-1 text-[10px] font-medium uppercase tracking-[0.28em] text-[#44624a]/55 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
@@ -281,14 +289,6 @@ export function PolaroidFlickThrough({
                   />
                 ) : null}
               </div>
-            </div>
-
-            <div className="order-1 mx-auto mt-5 max-w-[18rem] px-2 pb-6 text-center sm:mt-6 sm:max-w-sm lg:hidden">
-              <StageCopy
-                stage={currentStage}
-                stageNumber={currentStageIndex + 1}
-                compact
-              />
             </div>
           </div>
         </div>
@@ -316,13 +316,13 @@ export function PolaroidFlickThrough({
               </button>
 
               <div className="overflow-hidden rounded-xl bg-white p-4 pt-7 shadow-[0_30px_80px_rgba(0,0,0,0.35)] sm:pt-4">
-                <div className="relative mx-auto aspect-[4/5] w-full max-w-[520px] overflow-hidden rounded-lg bg-[#c0cfb2]/35">
+                <div className="relative mx-auto aspect-[16/10] w-full max-w-[640px] overflow-hidden rounded-lg bg-[#c0cfb2]/35">
                   {activeCard.imageSrc ? (
                     <Image
                       src={activeCard.imageSrc}
                       alt={activeCard.alt ?? activeCard.title}
                       fill
-                      sizes="(max-width: 640px) 90vw, 520px"
+                      sizes="(max-width: 640px) 90vw, 640px"
                       className="object-cover"
                     />
                   ) : (
@@ -364,15 +364,19 @@ function StageCopy({
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.35, ease: 'easeOut' }}
-      className={compact ? 'space-y-3' : 'max-w-[17rem] space-y-3'}
+      className={compact ? 'space-y-2.5' : 'max-w-[18rem] space-y-3'}
     >
-      <p className="text-xs font-medium uppercase tracking-[0.35em] text-[#44624a]/55">
-        Stage {stageNumber}
+      <p className={`text-[#44624a]/55 ${compact ? 'text-sm font-medium tracking-[0.02em]' : 'text-xs font-medium uppercase tracking-[0.35em]'}`}>
+        {compact ? `stage ${stageNumber}: ${stage.title.toLowerCase()}` : `Stage ${stageNumber}`}
       </p>
-      <h3 className="font-serif text-[2rem] leading-none tracking-[-0.04em] text-[#44624a] sm:text-3xl">
-        {stage.title}
-      </h3>
-      <p className="text-sm leading-6 text-[#44624a]/70 sm:leading-7">{stage.description}</p>
+      {compact ? null : (
+        <h3 className="font-serif text-[2rem] leading-none tracking-[-0.04em] text-[#44624a] sm:text-3xl">
+          {stage.title}
+        </h3>
+      )}
+      <p className={`text-[#44624a]/70 ${compact ? 'mx-auto max-w-[28ch] text-base leading-8 sm:max-w-[36ch]' : 'text-sm leading-6 sm:leading-7'}`}>
+        {stage.description}
+      </p>
     </motion.div>
   );
 }
