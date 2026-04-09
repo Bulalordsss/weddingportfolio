@@ -9,18 +9,26 @@ export default function CountdownSection() {
   const ref = React.useRef<HTMLElement>(null);
   useInView(ref, { amount: 0.75, once: false });
 
-  const targetDate = React.useMemo(() => {
-    const now = new Date();
-    const year = now.getUTCFullYear();
-    const target = new Date(Date.UTC(year, 3, 15, 0, 0, 0)); // April is month 3 (0-based)
-    return target.getTime() < now.getTime()
-      ? new Date(Date.UTC(year + 1, 3, 15, 0, 0, 0))
-      : target;
-  }, []);
+  const targetDate = React.useMemo(() => new Date(Date.UTC(2026, 3, 15, 0, 0, 0)), []);
 
   // IMPORTANT: avoid Date.now() in the initial render to prevent hydration mismatches.
   // Server + first client render must match exactly.
   const [remaining, setRemaining] = React.useState(() =>
+<<<<<<< HEAD
+    getTimeParts(targetDate.getTime() - targetDate.getTime()),
+  );
+
+  React.useEffect(() => {
+    const updateRemaining = () => {
+      setRemaining(getTimeParts(targetDate.getTime() - Date.now()));
+    };
+
+    updateRemaining();
+
+    const id = window.setInterval(() => {
+      updateRemaining();
+    }, 1000);
+=======
     getTimeParts(0),
   );
 
@@ -32,6 +40,7 @@ export default function CountdownSection() {
     // Set immediately after mount, then every second.
     tick();
     const id = window.setInterval(tick, 1000);
+>>>>>>> revise-joshua-and-vien-version
 
     return () => window.clearInterval(id);
   }, [targetDate]);
