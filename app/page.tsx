@@ -68,6 +68,7 @@ export default function Home() {
 
       <Hero />
       <InfoSection />
+      
       <FaqSection />
       <RsvpSection />
     </div>
