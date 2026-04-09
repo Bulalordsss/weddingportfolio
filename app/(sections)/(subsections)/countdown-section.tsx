@@ -7,8 +7,7 @@ import { Counter } from '@/components/ui/animated-counter';
 
 export default function CountdownSection() {
   const ref = React.useRef<HTMLElement>(null);
-  // Keep animations, but do not fade the section's background.
-  const inView = useInView(ref, { amount: 0.75, once: false });
+  useInView(ref, { amount: 0.75, once: false });
 
   const targetDate = React.useMemo(() => {
     const now = new Date();
@@ -19,14 +18,20 @@ export default function CountdownSection() {
       : target;
   }, []);
 
+  // IMPORTANT: avoid Date.now() in the initial render to prevent hydration mismatches.
+  // Server + first client render must match exactly.
   const [remaining, setRemaining] = React.useState(() =>
-    getTimeParts(targetDate.getTime() - Date.now()),
+    getTimeParts(0),
   );
 
   React.useEffect(() => {
-    const id = window.setInterval(() => {
+    const tick = () => {
       setRemaining(getTimeParts(targetDate.getTime() - Date.now()));
-    }, 1000);
+    };
+
+    // Set immediately after mount, then every second.
+    tick();
+    const id = window.setInterval(tick, 1000);
 
     return () => window.clearInterval(id);
   }, [targetDate]);
@@ -56,7 +61,7 @@ export default function CountdownSection() {
       >
         <div className="mx-auto max-w-5xl text-center">
           <p className="font-serif text-2xl tracking-[-0.04em] text-[#44624a]/70 sm:text-3xl">
-            so please join us...
+            Save the Date!
           </p>
 
           <h2 className="mt-6 font-serif text-6xl leading-[0.9] tracking-[-0.06em] text-[#44624a] sm:text-7xl lg:text-[6.8rem]">
@@ -92,11 +97,10 @@ function CountdownStat({
   value: number;
   pad: boolean;
 }) {
-  // Animate from previous -> next so ticking seconds remain readable.
-  const prevRef = React.useRef(value);
-  const prev = prevRef.current;
+  const [previousValue, setPreviousValue] = React.useState(value);
+
   React.useEffect(() => {
-    prevRef.current = value;
+    setPreviousValue((current) => (current === value ? current : value));
   }, [value]);
 
   const formatted = pad ? String(value).padStart(2, '0') : String(value);
@@ -105,7 +109,7 @@ function CountdownStat({
     <div className="min-w-[78px] text-center">
       <div className="relative mx-auto inline-block">
         <Counter
-          start={Math.max(0, prev)}
+          start={Math.max(0, previousValue)}
           end={Math.max(0, value)}
           duration={0.9}
           className="justify-center px-0 text-[#34271f]"

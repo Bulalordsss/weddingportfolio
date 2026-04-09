@@ -4,7 +4,6 @@ import { useEffect, useState } from "react";
 import Navbar from "../components/navbar";
 import Hero from "../components/hero";
 import MailSection from "./(sections)/mail-section";
-import StorySection from "./(sections)/story-section";
 import InfoSection from "./(sections)/info-section";
 import FaqSection from "./(sections)/faq-section";
 import RsvpSection from "./(sections)/rsvp-section";
@@ -68,7 +67,6 @@ export default function Home() {
       <Navbar hidden={!isInvitationOpened || hideNavbar || isPolaroidViewerOpen} />
 
       <Hero />
-      <StorySection />
       <InfoSection />
       <FaqSection />
       <RsvpSection />

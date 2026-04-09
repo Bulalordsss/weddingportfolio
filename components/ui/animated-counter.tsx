@@ -15,6 +15,14 @@ const fontSize = 40;
 const padding = 10;
 const height = fontSize + padding;
 
+function useHasMounted() {
+  const [mounted, setMounted] = React.useState(false);
+  React.useEffect(() => {
+    setMounted(true);
+  }, []);
+  return mounted;
+}
+
 interface CounterProps
   extends React.DetailedHTMLProps<
     React.HTMLAttributes<HTMLParagraphElement>,
@@ -35,6 +43,7 @@ export const Counter = ({
   fontSize = 30,
   ...rest
 }: CounterProps) => {
+  const mounted = useHasMounted();
   const [value, setValue] = useState(start);
 
   // Reset when inputs change (important for countdowns where `end` changes every second).
@@ -43,6 +52,7 @@ export const Counter = ({
   }, [start, end]);
 
   useEffect(() => {
+    if (!mounted) return;
     if (!isFinite(end) || !isFinite(start)) return;
 
     // Nothing to animate.
@@ -65,7 +75,26 @@ export const Counter = ({
     }, intervalMs);
 
     return () => window.clearInterval(id);
-  }, [start, end, duration]);
+  }, [mounted, start, end, duration]);
+
+  // To avoid hydration mismatches, server + first client render should be identical.
+  // So we render a non-animated value until after mount.
+  if (!mounted) {
+    return (
+      <div
+        style={{ fontSize }}
+        {...rest}
+        className={cn(
+          "flex overflow-hidden rounded px-2 leading-none text-primary font-bold ",
+          className,
+        )}
+      >
+        <span className="tabular-nums" suppressHydrationWarning>
+          {end}
+        </span>
+      </div>
+    );
+  }
 
   return (
     <div

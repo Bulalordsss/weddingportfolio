@@ -5,15 +5,6 @@ import { motion, useMotionValueEvent, useScroll } from 'framer-motion';
 import Image from 'next/image';
 import { createPortal } from 'react-dom';
 
-// NOTE: Palette tokens (Elegant Matcha)
-const MATCHA = {
-  ink: '#44624a',
-  sage: '#8ba888',
-  mint: '#c0cfb2',
-  cream: '#f1ebe1',
-  white: '#ffffff',
-};
-
 export interface PolaroidStoryCard {
   id: string;
   stage: number;
@@ -173,7 +164,7 @@ export function PolaroidFlickThrough({
   return (
     <section
       ref={containerRef}
-      className={`relative h-[420vh] bg-[${MATCHA.cream}] ${className}`}
+      className={`relative h-[420vh] bg-[#f1ebe1] ${className}`}
     >
       <div className="sticky top-0 flex min-h-screen overflow-hidden">
         <div className="absolute inset-0 bg-[#f1ebe1]" />
