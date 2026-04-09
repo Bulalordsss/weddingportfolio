@@ -11,7 +11,10 @@ export default function CountdownSection() {
 
   const targetDate = React.useMemo(() => new Date(Date.UTC(2026, 3, 15, 0, 0, 0)), []);
 
+  // IMPORTANT: avoid Date.now() in the initial render to prevent hydration mismatches.
+  // Server + first client render must match exactly.
   const [remaining, setRemaining] = React.useState(() =>
+<<<<<<< HEAD
     getTimeParts(targetDate.getTime() - targetDate.getTime()),
   );
 
@@ -25,6 +28,19 @@ export default function CountdownSection() {
     const id = window.setInterval(() => {
       updateRemaining();
     }, 1000);
+=======
+    getTimeParts(0),
+  );
+
+  React.useEffect(() => {
+    const tick = () => {
+      setRemaining(getTimeParts(targetDate.getTime() - Date.now()));
+    };
+
+    // Set immediately after mount, then every second.
+    tick();
+    const id = window.setInterval(tick, 1000);
+>>>>>>> revise-joshua-and-vien-version
 
     return () => window.clearInterval(id);
   }, [targetDate]);
@@ -54,7 +70,7 @@ export default function CountdownSection() {
       >
         <div className="mx-auto max-w-5xl text-center">
           <p className="font-serif text-2xl tracking-[-0.04em] text-[#44624a]/70 sm:text-3xl">
-            so please join us...
+            Save the Date!
           </p>
 
           <h2 className="mt-6 font-serif text-6xl leading-[0.9] tracking-[-0.06em] text-[#44624a] sm:text-7xl lg:text-[6.8rem]">

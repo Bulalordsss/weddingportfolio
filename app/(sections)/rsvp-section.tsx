@@ -5,6 +5,7 @@ import * as React from "react";
 import { toast } from "sonner";
 
 export default function RsvpSection() {
+<<<<<<< HEAD
   const [primaryName, setPrimaryName] = React.useState("");
   const [plusOnes, setPlusOnes] = React.useState<string[]>([]);
   const [note, setNote] = React.useState("");
@@ -18,8 +19,18 @@ export default function RsvpSection() {
     setPlusOnes((prev) => prev.map((v, i) => (i === index ? value : v)));
 
   const onSubmit = async (e: React.FormEvent) => {
+=======
+  const [primaryName, setPrimaryName] = React.useState('');
+  const [email, setEmail] = React.useState('');
+  const [attendance, setAttendance] = React.useState<'yes' | 'no'>('yes');
+  const [note, setNote] = React.useState('');
+  const [submitted, setSubmitted] = React.useState(false);
+
+  const onSubmit = (e: React.FormEvent) => {
+>>>>>>> revise-joshua-and-vien-version
     e.preventDefault();
 
+<<<<<<< HEAD
     const payload: RsvpPayload = {
       primaryName: primaryName.trim(),
       plusOnes: plusOnes.map((name) => name.trim()).filter(Boolean),
@@ -54,6 +65,10 @@ export default function RsvpSection() {
       toast.error("Network error while submitting RSVP");
       console.error(err);
     }
+=======
+    // Hook up to your backend / Google Form later.
+    console.log({ primaryName, email, attendance, note });
+>>>>>>> revise-joshua-and-vien-version
   };
 
   const deadline = "April 10, 2026";
@@ -90,7 +105,7 @@ export default function RsvpSection() {
               </p>
 
               <p className="mt-4 max-w-sm text-sm leading-relaxed text-[#44624a]/75">
-                Add your name, and if needed tap the plus to add a plus-one.
+                Share your name, email, and whether you&apos;ll be celebrating with us.
               </p>
             </div>
 
@@ -111,21 +126,27 @@ export default function RsvpSection() {
                   </div>
 
                   <div>
+                    <label className="block text-xs font-semibold tracking-[0.22em] text-[#44624a]/60">
+                      EMAIL
+                    </label>
+                    <input
+                      type="email"
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                      required
+                      placeholder="Enter your email address"
+                      className="mt-2 w-full rounded-xl border border-[#44624a]/15 bg-white/60 px-4 py-3 text-sm text-[#44624a] outline-none placeholder:text-[#44624a]/35 focus:border-[#44624a]/30"
+                    />
+                  </div>
+
+                  <div>
                     <div className="flex items-center justify-between">
                       <label className="block text-xs font-semibold tracking-[0.22em] text-[#44624a]/60">
-                        PLUS ONE
+                        ATTENDANCE
                       </label>
-                      <button
-                        type="button"
-                        onClick={addPlusOne}
-                        className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-[#44624a]/15 bg-white/60 text-[#44624a]/80 transition-colors hover:bg-white"
-                        aria-label="Add plus one"
-                        title="Add plus one"
-                      >
-                        +
-                      </button>
                     </div>
 
+<<<<<<< HEAD
                     {plusOnes.length ? (
                       <div className="mt-3 space-y-3">
                         {plusOnes.map((value, idx) => (
@@ -155,6 +176,36 @@ export default function RsvpSection() {
                         No plus one added.
                       </p>
                     )}
+=======
+                    <div className="mt-3 space-y-3">
+                      <label className="flex cursor-pointer items-start gap-3 rounded-xl border border-[#44624a]/15 bg-white/55 px-4 py-3 text-sm text-[#44624a] transition-colors hover:bg-white/70">
+                        <input
+                          type="radio"
+                          name="attendance"
+                          value="yes"
+                          checked={attendance === 'yes'}
+                          onChange={() => setAttendance('yes')}
+                          className="mt-1 h-4 w-4 accent-[#44624a]"
+                        />
+                        <span>Yes, I will be there!</span>
+                      </label>
+                      <label className="flex cursor-pointer items-start gap-3 rounded-xl border border-[#44624a]/15 bg-white/55 px-4 py-3 text-sm text-[#44624a] transition-colors hover:bg-white/70">
+                        <input
+                          type="radio"
+                          name="attendance"
+                          value="no"
+                          checked={attendance === 'no'}
+                          onChange={() => setAttendance('no')}
+                          className="mt-1 h-4 w-4 accent-[#44624a]"
+                        />
+                        <span>No, Unfortunately I can&apos;t attend</span>
+                      </label>
+                    </div>
+
+                    <p className="mt-3 text-sm leading-relaxed text-[#44624a]/60">
+                      Please note that bringing a plus one or a kid is not allowed.
+                    </p>
+>>>>>>> revise-joshua-and-vien-version
                   </div>
 
                   <div>
@@ -164,7 +215,7 @@ export default function RsvpSection() {
                     <textarea
                       value={note}
                       onChange={(e) => setNote(e.target.value)}
-                      placeholder="Dietary restrictions, song requests, etc."
+                      placeholder="Dietary restrictions or any concerns you would like us to know."
                       rows={4}
                       className="mt-2 w-full resize-none rounded-xl border border-[#44624a]/15 bg-white/60 px-4 py-3 text-sm text-[#44624a] outline-none placeholder:text-[#44624a]/35 focus:border-[#44624a]/30"
                     />

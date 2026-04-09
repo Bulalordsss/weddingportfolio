@@ -19,7 +19,7 @@ export default function MailSection({ isOpen, onOpen }: MailSectionProps) {
       ].join(' ')}
     >
       <Image
-        src="/hero7.jpg"
+        src="/bg.jpeg"
         alt="Romantic seaside background"
         fill
         priority
@@ -40,11 +40,12 @@ export default function MailSection({ isOpen, onOpen }: MailSectionProps) {
           >
             <div className="absolute inset-x-[6%] bottom-[-1.5rem] top-[10%] rounded-[2.5rem] bg-black/20 blur-3xl transition duration-500 group-hover:bg-black/30" />
             <Image
-              src="/mail.png"
+              src="/mail1.png"
               alt="Wedding invitation envelope"
               width={1500}
               height={1120}
               priority
+              unoptimized
               sizes="(max-width: 768px) 90vw, 780px"
               className="relative z-10 h-auto w-full drop-shadow-[0_18px_55px_rgba(0,0,0,0.45)]"
             />
