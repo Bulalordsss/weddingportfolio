@@ -5,39 +5,23 @@ import * as React from "react";
 import { toast } from "sonner";
 
 export default function RsvpSection() {
-<<<<<<< HEAD
   const [primaryName, setPrimaryName] = React.useState("");
-  const [plusOnes, setPlusOnes] = React.useState<string[]>([]);
+  const [email, setEmail] = React.useState("");
+  const [attendance, setAttendance] = React.useState<"yes" | "no">("yes");
   const [note, setNote] = React.useState("");
   const [submitted, setSubmitted] = React.useState(false);
 
-  const addPlusOne = () => setPlusOnes((prev) => [...prev, ""]);
-  const removePlusOne = (index: number) =>
-    setPlusOnes((prev) => prev.filter((_, i) => i !== index));
-
-  const updatePlusOne = (index: number, value: string) =>
-    setPlusOnes((prev) => prev.map((v, i) => (i === index ? value : v)));
-
   const onSubmit = async (e: React.FormEvent) => {
-=======
-  const [primaryName, setPrimaryName] = React.useState('');
-  const [email, setEmail] = React.useState('');
-  const [attendance, setAttendance] = React.useState<'yes' | 'no'>('yes');
-  const [note, setNote] = React.useState('');
-  const [submitted, setSubmitted] = React.useState(false);
-
-  const onSubmit = (e: React.FormEvent) => {
->>>>>>> revise-joshua-and-vien-version
     e.preventDefault();
 
-<<<<<<< HEAD
-    const payload: RsvpPayload = {
+    const payload = {
       primaryName: primaryName.trim(),
-      plusOnes: plusOnes.map((name) => name.trim()).filter(Boolean),
+      email: email.trim(),
+      attendance,
       notes: note.trim(),
     };
 
-    const loading = toast.loading("Submitting RSVP...");
+    const loading = toast.loading("Submitting RSVP....");
 
     try {
       const res = await fetch("/api/rsvp", {
@@ -45,30 +29,32 @@ export default function RsvpSection() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload),
       });
+      if (res.ok) {
+        toast.success("RSVP submitted successfully!");
+        setSubmitted(true);
+      } else {
+        toast.error("Failed to submit RSVP.");
+      }
 
       const data = await res.json();
 
       toast.dismiss(loading);
 
       if (!res.ok || !data.ok) {
-        toast.error(data?.error || "Failed to submit RSVP");
+        toast.error("Failed to submit RSVP.");
         return;
       }
 
-      toast.success("RSVP submitted!");
       setSubmitted(true);
       setPrimaryName("");
-      setPlusOnes([]);
+      setEmail("");
+      setAttendance("yes");
       setNote("");
-    } catch (err) {
+    } catch (error) {
+      toast.error("An error occurred while submitting your RSVP.");
+    } finally {
       toast.dismiss(loading);
-      toast.error("Network error while submitting RSVP");
-      console.error(err);
     }
-=======
-    // Hook up to your backend / Google Form later.
-    console.log({ primaryName, email, attendance, note });
->>>>>>> revise-joshua-and-vien-version
   };
 
   const deadline = "April 10, 2026";
@@ -105,7 +91,8 @@ export default function RsvpSection() {
               </p>
 
               <p className="mt-4 max-w-sm text-sm leading-relaxed text-[#44624a]/75">
-                Share your name, email, and whether you&apos;ll be celebrating with us.
+                Share your name, email, and whether you&apos;ll be celebrating
+                with us.
               </p>
             </div>
 
@@ -146,45 +133,14 @@ export default function RsvpSection() {
                       </label>
                     </div>
 
-<<<<<<< HEAD
-                    {plusOnes.length ? (
-                      <div className="mt-3 space-y-3">
-                        {plusOnes.map((value, idx) => (
-                          <div key={idx} className="flex items-center gap-3">
-                            <input
-                              value={value}
-                              onChange={(e) =>
-                                updatePlusOne(idx, e.target.value)
-                              }
-                              placeholder={`Plus one #${idx + 1} name`}
-                              className="w-full rounded-xl border border-[#44624a]/15 bg-white/60 px-4 py-3 text-sm text-[#44624a] outline-none placeholder:text-[#44624a]/35 focus:border-[#44624a]/30"
-                            />
-                            <button
-                              type="button"
-                              onClick={() => removePlusOne(idx)}
-                              className="inline-flex h-9 w-9 flex-none items-center justify-center rounded-full border border-[#44624a]/15 bg-white/60 text-[#44624a]/60 hover:bg-white"
-                              aria-label="Remove"
-                              title="Remove"
-                            >
-                              ×
-                            </button>
-                          </div>
-                        ))}
-                      </div>
-                    ) : (
-                      <p className="mt-3 text-sm text-[#44624a]/55">
-                        No plus one added.
-                      </p>
-                    )}
-=======
                     <div className="mt-3 space-y-3">
                       <label className="flex cursor-pointer items-start gap-3 rounded-xl border border-[#44624a]/15 bg-white/55 px-4 py-3 text-sm text-[#44624a] transition-colors hover:bg-white/70">
                         <input
                           type="radio"
                           name="attendance"
                           value="yes"
-                          checked={attendance === 'yes'}
-                          onChange={() => setAttendance('yes')}
+                          checked={attendance === "yes"}
+                          onChange={() => setAttendance("yes")}
                           className="mt-1 h-4 w-4 accent-[#44624a]"
                         />
                         <span>Yes, I will be there!</span>
@@ -194,8 +150,8 @@ export default function RsvpSection() {
                           type="radio"
                           name="attendance"
                           value="no"
-                          checked={attendance === 'no'}
-                          onChange={() => setAttendance('no')}
+                          checked={attendance === "no"}
+                          onChange={() => setAttendance("no")}
                           className="mt-1 h-4 w-4 accent-[#44624a]"
                         />
                         <span>No, Unfortunately I can&apos;t attend</span>
@@ -203,9 +159,9 @@ export default function RsvpSection() {
                     </div>
 
                     <p className="mt-3 text-sm leading-relaxed text-[#44624a]/60">
-                      Please note that bringing a plus one or a kid is not allowed.
+                      Please note that bringing a plus one or a kid is not
+                      allowed.
                     </p>
->>>>>>> revise-joshua-and-vien-version
                   </div>
 
                   <div>

@@ -1,5 +1,6 @@
 export type RsvpPayload = {
   primaryName: string;
-  plusOnes: string[];
+  email: string;
+  attendance: "yes" | "no";
   notes: string;
 };

@@ -1,46 +1,29 @@
-'use client';
+"use client";
 
-import * as React from 'react';
-import { motion, useInView } from 'framer-motion';
+import * as React from "react";
+import { motion, useInView } from "framer-motion";
 
-import { Counter } from '@/components/ui/animated-counter';
+import { Counter } from "@/components/ui/animated-counter";
 
 export default function CountdownSection() {
   const ref = React.useRef<HTMLElement>(null);
   useInView(ref, { amount: 0.75, once: false });
 
-  const targetDate = React.useMemo(() => new Date(Date.UTC(2026, 3, 15, 0, 0, 0)), []);
-
-  // IMPORTANT: avoid Date.now() in the initial render to prevent hydration mismatches.
-  // Server + first client render must match exactly.
-  const [remaining, setRemaining] = React.useState(() =>
-<<<<<<< HEAD
-    getTimeParts(targetDate.getTime() - targetDate.getTime()),
+  const targetDate = React.useMemo(
+    () => new Date(Date.UTC(2026, 3, 15, 0, 0, 0)),
+    [],
   );
 
-  React.useEffect(() => {
-    const updateRemaining = () => {
-      setRemaining(getTimeParts(targetDate.getTime() - Date.now()));
-    };
-
-    updateRemaining();
-
-    const id = window.setInterval(() => {
-      updateRemaining();
-    }, 1000);
-=======
-    getTimeParts(0),
-  );
+  // IMPORTANT: avoid Date.now() in initial render to prevent hydration mismatch.
+  const [remaining, setRemaining] = React.useState(() => getTimeParts(0));
 
   React.useEffect(() => {
     const tick = () => {
       setRemaining(getTimeParts(targetDate.getTime() - Date.now()));
     };
 
-    // Set immediately after mount, then every second.
-    tick();
+    tick(); // run immediately on mount
     const id = window.setInterval(tick, 1000);
->>>>>>> revise-joshua-and-vien-version
 
     return () => window.clearInterval(id);
   }, [targetDate]);
@@ -51,14 +34,13 @@ export default function CountdownSection() {
       className="relative flex min-h-[100svh] items-center overflow-hidden bg-[#f1ebe1] text-[#44624a]"
       aria-label="Countdown"
     >
-      {/* subtle paper speckles */}
       <div
         aria-hidden="true"
         className="pointer-events-none absolute inset-0 opacity-[0.12] mix-blend-multiply"
         style={{
           backgroundImage:
-            'radial-gradient(rgba(68,98,74,0.22) 1px, transparent 1px)',
-          backgroundSize: '18px 18px',
+            "radial-gradient(rgba(68,98,74,0.22) 1px, transparent 1px)",
+          backgroundSize: "18px 18px",
         }}
       />
 
@@ -66,7 +48,7 @@ export default function CountdownSection() {
         className="container relative mx-auto px-6 py-24"
         initial={{ opacity: 1, y: 0, scale: 1 }}
         animate={{ opacity: 1, y: 0, scale: 1 }}
-        transition={{ duration: 0.0 }}
+        transition={{ duration: 0 }}
       >
         <div className="mx-auto max-w-5xl text-center">
           <p className="font-serif text-2xl tracking-[-0.04em] text-[#44624a]/70 sm:text-3xl">
@@ -83,7 +65,8 @@ export default function CountdownSection() {
                 display: none;
               }
             `}</style>
-            <CountdownStat label="DAYS" value={remaining.days} pad={false} />
+
+            <CountdownStat label="DAYS" value={remaining.days} />
             <DividerDot />
             <CountdownStat label="HOURS" value={remaining.hours} pad />
             <DividerDot />
@@ -100,11 +83,11 @@ export default function CountdownSection() {
 function CountdownStat({
   label,
   value,
-  pad,
+  pad = false,
 }: {
   label: string;
   value: number;
-  pad: boolean;
+  pad?: boolean;
 }) {
   const [previousValue, setPreviousValue] = React.useState(value);
 
@@ -112,7 +95,7 @@ function CountdownStat({
     setPreviousValue((current) => (current === value ? current : value));
   }, [value]);
 
-  const formatted = pad ? String(value).padStart(2, '0') : String(value);
+  const formatted = pad ? String(value).padStart(2, "0") : String(value);
 
   return (
     <div className="min-w-[78px] text-center">
@@ -125,7 +108,6 @@ function CountdownStat({
           fontSize={38}
         />
 
-        {/* Ensures consistent width for 2-digit fields */}
         <span className="pointer-events-none absolute inset-0 grid place-items-center font-serif text-[2.15rem] tracking-[-0.03em] text-transparent sm:text-[2.5rem]">
           {formatted}
         </span>
@@ -148,8 +130,8 @@ function DividerDot() {
 
 function getTimeParts(ms: number) {
   const clamped = Math.max(0, ms);
-
   const totalSeconds = Math.floor(clamped / 1000);
+
   const days = Math.floor(totalSeconds / 86400);
   const hours = Math.floor((totalSeconds % 86400) / 3600);
   const minutes = Math.floor((totalSeconds % 3600) / 60);
