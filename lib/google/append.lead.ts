@@ -1,6 +1,6 @@
+import { env } from "../config/env";
 import { RsvpPayload } from "@/types/rsvp";
 import { getSheetsClient } from "./sheets.client";
-import { env } from "../config/env";
 
 export async function appendRsvpToSheet(data: RsvpPayload) {
   const sheets = getSheetsClient();
@@ -16,12 +16,18 @@ export async function appendRsvpToSheet(data: RsvpPayload) {
   }).format(new Date());
 
   const values = [
-    [submittedAt, data.primaryName, data.plusOnes.join(", "), data.notes || ""],
+    [
+      submittedAt,
+      data.primaryName,
+      data.email,
+      data.attendance,
+      data.notes || "",
+    ],
   ];
 
   await sheets.spreadsheets.values.append({
     spreadsheetId: env.GOOGLE_SHEET_ID,
-    range: `${env.GOOGLE_SHEET_NAME}!A:D`,
+    range: `${env.GOOGLE_SHEET_NAME}!A:E`,
     valueInputOption: "USER_ENTERED",
     requestBody: { values },
   });
