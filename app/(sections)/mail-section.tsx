@@ -40,7 +40,7 @@ export default function MailSection({ isOpen, onOpen }: MailSectionProps) {
           >
             <div className="absolute inset-x-[6%] bottom-[-1.5rem] top-[10%] rounded-[2.5rem] bg-black/20 blur-3xl transition duration-500 group-hover:bg-black/30" />
             <Image
-              src="/mail1.png"
+              src="/mail3.png"
               alt="Wedding invitation envelope"
               width={1500}
               height={1120}

@@ -337,6 +337,10 @@ export const CircularTestimonials = ({
           display: inline-block;
         }
         @media (min-width: 768px) {
+          .testimonial-container {
+            margin-left: auto;
+            margin-right: auto;
+          }
           .testimonial-grid {
             grid-template-columns: 1fr 1fr;
           }

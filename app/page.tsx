@@ -7,6 +7,7 @@ import MailSection from "./(sections)/mail-section";
 import InfoSection from "./(sections)/info-section";
 import FaqSection from "./(sections)/faq-section";
 import RsvpSection from "./(sections)/rsvp-section";
+import TestimonialsSection from "./(sections)/testimonials-section";
 
 export default function Home() {
   const [isInvitationOpened, setIsInvitationOpened] = useState(false);
@@ -67,8 +68,9 @@ export default function Home() {
       <Navbar hidden={!isInvitationOpened || hideNavbar || isPolaroidViewerOpen} />
 
       <Hero />
+      <TestimonialsSection />
+
       <InfoSection />
-      
       <FaqSection />
       <RsvpSection />
     </div>

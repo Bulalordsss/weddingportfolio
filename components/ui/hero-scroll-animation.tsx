@@ -31,17 +31,22 @@ const Section1: React.FC<SectionProps> = ({ scrollYProgress }) => {
         <div className="pointer-events-none absolute inset-0 z-10">
           <div className="absolute inset-0 flex items-center justify-center px-6 text-center">
             <div className="flex flex-col items-center">
+              {/* Keep existing font/color for this heading */}
               <h1 className="max-w-[12ch] font-serif text-5xl font-semibold leading-[0.92] tracking-tight text-[#44624a] md:text-7xl">
                 <span className="block">WE ARE</span>
                 <span className="block">GETTING MARRIED</span>
               </h1>
 
-              <div
-                style={{ fontFamily: '"Snell Roundhand", "Brush Script MT", cursive' }}
-                className="mt-3 text-center text-[2.8rem] leading-[0.85] text-[#6b8a68] sm:mt-4 sm:text-[4.1rem] md:text-[5.2rem]"
-              >
-                <span className="block">Joshua</span>
-                <span className="block">&amp; Vien</span>
+              {/* Replace names with the provided artwork image */}
+              <div className="relative mt-4 w-[min(360px,78vw)] md:mt-5 md:w-[min(420px,62vw)]">
+                <Image
+                  src="/J&V.png"
+                  alt="Joshua and Vien"
+                  width={1040}
+                  height={520}
+                  priority
+                  className="h-auto w-full select-none object-contain"
+                />
               </div>
             </div>
           </div>
@@ -126,8 +131,13 @@ const Section2: React.FC<SectionProps> = ({ scrollYProgress }) => {
 
               <div className="flex flex-col justify-start">
                 <motion.h2
-                  style={{ opacity: headlineOpacity, y: headlineY, fontFamily: '"Amoresa Aged Cinzel", "Amoresa Aged", var(--font-cinzel), serif' }}
-                  className="text-center text-[2.05rem] leading-[0.94] tracking-[-0.05em] text-[#44624a] sm:text-[3.4rem] lg:text-right lg:text-[4.7rem]"
+                  style={{
+                    opacity: headlineOpacity,
+                    y: headlineY,
+                    textTransform: 'none',
+                    fontVariantCaps: 'normal',
+                  }}
+                  className="font-sans text-center text-[2.05rem] normal-case leading-[0.94] tracking-[-0.05em] text-[#44624a] sm:text-[3.4rem] lg:text-right lg:text-[4.7rem]"
                 >
                   Let&apos;s celebrate love,
                   <br />
@@ -141,8 +151,8 @@ const Section2: React.FC<SectionProps> = ({ scrollYProgress }) => {
                   className="mt-5 max-w-xl text-left lg:mt-12"
                 >
                   <p
-                    style={{ fontFamily: '"Amoresa Aged Cinzel", "Amoresa Aged", var(--font-cinzel), serif' }}
-                    className="text-[0.96rem] leading-relaxed text-[#44624a]/88 sm:text-[1.45rem]"
+                    style={{ textTransform: 'none', fontVariantCaps: 'normal' }}
+                    className="font-sans text-[0.96rem] normal-case leading-relaxed text-[#44624a]/88 sm:text-[1.45rem]"
                   >
                     Together with our beloved families, we humbly invite you to share in our joy as we pledge our love and commitment in a timeless celebration of marriage
                   </p>
@@ -154,7 +164,7 @@ const Section2: React.FC<SectionProps> = ({ scrollYProgress }) => {
                 >
                   <p
                     style={{ fontFamily: '"Amoresa Aged Cinzel", "Amoresa Aged", var(--font-cinzel), serif' }}
-                    className="text-base leading-relaxed text-[#44624a]/82 sm:text-[1.35rem]"
+                    className="text-base leading-relaxed text-[#44624a]/82 uppercase sm:text-[1.35rem]"
                   >
                     With Love,
                   </p>
