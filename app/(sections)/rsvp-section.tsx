@@ -57,8 +57,6 @@ export default function RsvpSection() {
     }
   };
 
-  const deadline = "April 10, 2026";
-
   return (
     <section
       id="rsvp"
@@ -84,10 +82,14 @@ export default function RsvpSection() {
               </h2>
 
               <p className="mt-6 max-w-sm text-sm leading-relaxed text-[#44624a]/75">
-                Please submit your RSVP on or before
+                We’re so excited to celebrate with you! If you have any questions
+                or need any clarification, please don’t hesitate to reach out.
+                You can message us on our socials or contact us directly at
+                <span className="font-semibold text-[#44624a]"> 09275073844</span>
+                /<span className="font-semibold text-[#44624a]">09660124298</span>.
                 <br />
-                <span className="font-semibold text-[#44624a]">{deadline}</span>
-                .
+                <br />
+                we’d love to hear from you!
               </p>
 
               <p className="mt-4 max-w-sm text-sm leading-relaxed text-[#44624a]/75">

@@ -20,7 +20,7 @@ export default function Navbar({ hidden }: NavbarProps): ReactElement | null {
 
         <div className="flex items-center gap-2 sm:gap-3">
           <a
-            href="#story"
+            href="#testimonials"
             className="rounded-full px-3 py-1.5 text-xs font-medium text-[#44624a]/70 transition-colors hover:text-[#44624a]"
           >
             Story

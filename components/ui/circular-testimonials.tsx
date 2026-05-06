@@ -66,12 +66,17 @@ export const CircularTestimonials = ({
 
   // State
   const [activeIndex, setActiveIndex] = useState(0);
+  const [containerWidth, setContainerWidth] = useState(1200);
   const [hoverPrev, setHoverPrev] = useState(false);
   const [hoverNext, setHoverNext] = useState(false);
-  const [containerWidth, setContainerWidth] = useState(1200);
 
   const imageContainerRef = useRef<HTMLDivElement>(null);
   const autoplayIntervalRef = useRef<NodeJS.Timeout | null>(null);
+
+  // Touch swipe
+  const touchStartXRef = useRef<number | null>(null);
+  const touchStartYRef = useRef<number | null>(null);
+  const touchStartTimeRef = useRef<number | null>(null);
 
   const testimonialsLength = useMemo(() => testimonials.length, [testimonials]);
   const activeTestimonial = useMemo(
@@ -126,6 +131,50 @@ export const CircularTestimonials = ({
     );
     if (autoplayIntervalRef.current) clearInterval(autoplayIntervalRef.current);
   }, [testimonialsLength]);
+
+  const handleTouchStart = useCallback(
+    (e: React.TouchEvent) => {
+      const t = e.touches[0];
+      if (!t) return;
+      touchStartXRef.current = t.clientX;
+      touchStartYRef.current = t.clientY;
+      touchStartTimeRef.current = Date.now();
+    },
+    []
+  );
+
+  const handleTouchEnd = useCallback(
+    (e: React.TouchEvent) => {
+      const startX = touchStartXRef.current;
+      const startY = touchStartYRef.current;
+      const startTime = touchStartTimeRef.current;
+      const t = e.changedTouches[0];
+      if (startX == null || startY == null || startTime == null || !t) return;
+
+      const dx = t.clientX - startX;
+      const dy = t.clientY - startY;
+      const dt = Date.now() - startTime;
+
+      // Reset
+      touchStartXRef.current = null;
+      touchStartYRef.current = null;
+      touchStartTimeRef.current = null;
+
+      // Basic swipe detection: horizontal intent + distance threshold
+      const absDx = Math.abs(dx);
+      const absDy = Math.abs(dy);
+      const minDistance = 40;
+      const maxTime = 800;
+
+      if (dt > maxTime) return;
+      if (absDx < minDistance) return;
+      if (absDy > absDx * 0.8) return;
+
+      if (dx < 0) handleNext();
+      else handlePrev();
+    },
+    [handleNext, handlePrev]
+  );
 
   // Compute transforms for each image (always show 3: left, center, right)
   function getImageStyle(index: number): React.CSSProperties {
@@ -182,7 +231,14 @@ export const CircularTestimonials = ({
     <div className="testimonial-container">
       <div className="testimonial-grid">
         {/* Images */}
-        <div className="image-container" ref={imageContainerRef}>
+        <div
+          className="image-container"
+          ref={imageContainerRef}
+          onTouchStart={handleTouchStart}
+          onTouchEnd={handleTouchEnd}
+          aria-label="Story photos. Swipe left or right to navigate."
+          role="region"
+        >
           {testimonials.map((testimonial, index) => (
             <img
               key={testimonial.src}
@@ -191,6 +247,7 @@ export const CircularTestimonials = ({
               className="testimonial-image"
               data-index={index}
               style={getImageStyle(index)}
+              draggable={false}
             />
           ))}
         </div>
@@ -250,7 +307,8 @@ export const CircularTestimonials = ({
               </motion.p>
             </motion.div>
           </AnimatePresence>
-          <div className="arrow-buttons">
+
+          <div className="arrow-buttons" aria-label="Story photo navigation">
             <button
               className="arrow-button prev-button"
               onClick={handlePrev}
@@ -259,9 +317,10 @@ export const CircularTestimonials = ({
               }}
               onMouseEnter={() => setHoverPrev(true)}
               onMouseLeave={() => setHoverPrev(false)}
-              aria-label="Previous testimonial"
+              aria-label="Previous photo"
+              type="button"
             >
-              <FaArrowLeft size={28} color={colorArrowFg} />
+              <FaArrowLeft size={22} color={colorArrowFg} />
             </button>
             <button
               className="arrow-button next-button"
@@ -271,9 +330,10 @@ export const CircularTestimonials = ({
               }}
               onMouseEnter={() => setHoverNext(true)}
               onMouseLeave={() => setHoverNext(false)}
-              aria-label="Next testimonial"
+              aria-label="Next photo"
+              type="button"
             >
-              <FaArrowRight size={28} color={colorArrowFg} />
+              <FaArrowRight size={22} color={colorArrowFg} />
             </button>
           </div>
         </div>
@@ -283,24 +343,33 @@ export const CircularTestimonials = ({
           width: 100%;
           max-width: 56rem;
           padding: 2rem;
+          padding-top: 3rem;
         }
         .testimonial-grid {
           display: grid;
-          gap: 5rem;
+          gap: 3rem;
         }
         .image-container {
           position: relative;
           width: 100%;
-          height: 24rem;
+          /* Bring it down a bit so it doesn't collide with navbar */
+          margin-top: 1.5rem;
+          /* Landscape-friendly: 16:9 */
+          aspect-ratio: 16 / 9;
+          height: auto;
           perspective: 1000px;
+          touch-action: pan-y;
+          user-select: none;
         }
         .testimonial-image {
           position: absolute;
           width: 100%;
           height: 100%;
           object-fit: cover;
+          object-position: center;
           border-radius: 1.5rem;
           box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+          -webkit-user-drag: none;
         }
         .testimonial-content {
           display: flex;
@@ -319,13 +388,13 @@ export const CircularTestimonials = ({
         }
         .arrow-buttons {
           display: flex;
-          gap: 1.5rem;
-          padding-top: 3rem;
+          gap: 1rem;
+          padding-top: 1.5rem;
         }
         .arrow-button {
-          width: 2.7rem;
-          height: 2.7rem;
-          border-radius: 50%;
+          width: 2.5rem;
+          height: 2.5rem;
+          border-radius: 9999px;
           display: flex;
           align-items: center;
           justify-content: center;
@@ -333,16 +402,18 @@ export const CircularTestimonials = ({
           transition: background-color 0.3s;
           border: none;
         }
-        .word {
-          display: inline-block;
-        }
         @media (min-width: 768px) {
           .testimonial-container {
             margin-left: auto;
             margin-right: auto;
+            padding-top: 2rem;
           }
           .testimonial-grid {
             grid-template-columns: 1fr 1fr;
+            gap: 5rem;
+          }
+          .image-container {
+            margin-top: 0;
           }
           .arrow-buttons {
             padding-top: 0;

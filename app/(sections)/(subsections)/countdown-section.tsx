@@ -10,7 +10,7 @@ export default function CountdownSection() {
   useInView(ref, { amount: 0.75, once: false });
 
   const targetDate = React.useMemo(
-    () => new Date(Date.UTC(2026, 3, 15, 0, 0, 0)),
+    () => new Date(Date.UTC(2026, 4, 15, 0, 0, 0)),
     [],
   );
 
@@ -56,7 +56,7 @@ export default function CountdownSection() {
           </p>
 
           <h2 className="mt-6 font-serif text-6xl leading-[0.9] tracking-[-0.06em] text-[#44624a] sm:text-7xl lg:text-[6.8rem]">
-            april 15, 2026
+            May 15, 2026
           </h2>
 
           <div className="mt-12 flex flex-nowrap items-end justify-center gap-5 overflow-x-auto whitespace-nowrap [scrollbar-width:none] [-ms-overflow-style:none] sm:flex-wrap sm:gap-12">

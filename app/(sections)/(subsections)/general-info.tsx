@@ -15,86 +15,102 @@ type InfoCard = {
     title: string;
     body: string;
     bullets?: string[];
+    imageSrc?: string;
+    linkHref?: string;
+    linkLabel?: string;
   };
 };
 
 const CARDS: InfoCard[] = [
   {
-    id: 'wedding-party',
+    id: 'ceremony',
     imageUrl:
-      'https://images.unsplash.com/photo-1522293531603-6df6d48a6d9b?auto=format&fit=crop&w=1400&q=60',
-    location: 'Wedding Party',
-    stats: 'Meet our favorite people',
-    themeColor: '210 60% 32%',
+      '/hero5.jpg',
+    location: 'The Ceremony',
+    stats: 'Families & witnesses only',
+    themeColor: '150 45% 25%',
     details: {
-      title: 'Wedding Party',
-      body: 'Here’s where you can list your bridesmaids, groomsmen, flower girls, ring bearers, etc.',
-      bullets: ['Maid of Honor', 'Best Man', 'Bridesmaids & Groomsmen'],
+      title: 'The Ceremony',
+      body:
+        'We lovingly share that our ceremony will be a quiet and intimate moment, held in the presence of our closest family and chosen witnesses. Though the ceremony itself is private, it would truly mean so much to us to celebrate with you at the reception where we can gather, share joy, and create beautiful memories together. Thank you for your understanding and for being part of our hearts on this special day.',
+      bullets: ['Families and witnesses only'],
     },
   },
   {
-    id: 'travel',
+    id: 'celebration',
+    imageUrl: '/verdeli.jpg',
+    location: 'The Celebration',
+    stats: 'Venue details',
+    themeColor: '190 55% 28%',
+    details: {
+      title: 'The Celebration',
+      body:
+        'Venue: Verdeli Garden & Cafe\nPurok 3B Brgy, Calinan, Baguio District, Davao City, 8000 Davao del Sur',
+      linkHref: 'https://maps.app.goo.gl/21zcTcyEj84Lf12h8',
+      linkLabel: 'Open in Google Maps',
+      imageSrc: '/verdeli.jpg',
+      bullets: ['Verdeli Garden & Cafe', 'Davao City'],
+    },
+  },
+  {
+    id: 'timeline',
     imageUrl:
-      'https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1400&q=60',
-    location: 'Travel Logistics',
-    stats: 'Getting here & staying here',
+      '/party.png',
+    location: 'Timeline of Events',
+    stats: 'Wedding schedule',
     themeColor: '30 70% 28%',
     details: {
-      title: 'Travel Logistics',
-      body: 'Add airport suggestions, driving/parking notes, and recommended hotels/areas to stay.',
-      bullets: ['Nearest airport', 'Suggested hotels', 'Parking / rideshare'],
+      title: 'Timeline of Events',
+      body:
+        'Wedding Timeline:\n\nCall time: 9:00 am\nWedding ceremony: 10:00 am\nReception: 12:30 pm\nClosing ceremony: 4:00 pm',
+      bullets: ['Ceremony', 'Photoshoot', 'Late lunch', 'Cocktails/Drinks (Chitchat)'],
     },
   },
   {
-    id: 'registry',
-    imageUrl:
-      'https://images.unsplash.com/photo-1520975693410-001d7e4b4d9a?auto=format&fit=crop&w=1400&q=60',
-    location: 'Registry',
-    stats: 'If you’d like to gift something',
-    themeColor: '330 55% 30%',
+    id: 'map',
+    imageUrl: '/map.png',
+    location: 'Map Illustration of the Venue',
+    stats: 'Venue Details',
+    themeColor: '210 60% 32%',
     details: {
-      title: 'Registry',
-      body: 'Link your registry (or add a note if you prefer no gifts).',
-      bullets: ['Registry link', 'Shipping address', 'Notes'],
+      title: 'Map Illustration of the Venue',
+      body:
+        'Here’s a map illustration to help you get familiar with the venue and find key areas once you arrive.\n\nFor the easiest route, you can also search “Verdeli Garden & Cafe” on Google Maps and follow the directions from your location.',
+      linkHref: 'https://maps.app.goo.gl/21zcTcyEj84Lf12h8',
+      linkLabel: 'Open directions in Google Maps',
+      imageSrc: '/map.png',
+      bullets: [
+        'Tap “View Image” to open the full map',
+        'Use Google Maps for turn-by-turn directions',
+      ],
     },
   },
   {
     id: 'dress-code',
     imageUrl:
-      'https://images.unsplash.com/photo-1520962917969-5f6bb1bf1b8f?auto=format&fit=crop&w=1400&q=60',
+      '/dresscode.jpg',
     location: 'Dress Code',
-    stats: 'What to wear',
+    stats: 'Semi-formal attire',
     themeColor: '250 50% 30%',
     details: {
       title: 'Dress Code',
-      body: 'Describe attire expectations and any color palette request.',
-      bullets: ['Attire', 'Color palette (optional)', 'Comfort notes'],
+      body:
+        'We kindly encourage our favorite people to join us in semi-formal attire. Your thoughtful coordination will help create a beautiful and cohesive atmosphere for our special day.\n\nPlease be guided below.\n\nWhite is reserved for the bride - thank you for understanding.',
+      bullets: ['Semi-formal attire', 'Please be guided below', 'White is reserved for the bride'],
     },
   },
   {
-    id: 'kids',
+    id: 'gift-corner',
     imageUrl:
-      'https://images.unsplash.com/photo-1527224857830-43a7acc85260?auto=format&fit=crop&w=1400&q=60',
-    location: 'Kids & Plus-Ones',
-    stats: 'Guest guidelines',
-    themeColor: '150 45% 25%',
+      '/gift.png',
+    location: 'Gift Corner',
+    stats: 'Honeymoon fund / gifts',
+    themeColor: '330 55% 30%',
     details: {
-      title: 'Kids & Plus-Ones',
-      body: 'Clarify if kids are invited, whether plus-ones are included, and any capacity notes.',
-      bullets: ['Kids policy', 'Plus-one policy', 'RSVP by deadline'],
-    },
-  },
-  {
-    id: 'schedule',
-    imageUrl:
-      'https://images.unsplash.com/photo-1515165562835-c3b8c9f5e5f0?auto=format&fit=crop&w=1400&q=60',
-    location: 'Day-Of Schedule',
-    stats: 'Timeline overview',
-    themeColor: '190 55% 28%',
-    details: {
-      title: 'Day-Of Schedule',
-      body: 'Add a short schedule overview for guests (arrival time, ceremony, reception, send-off).',
-      bullets: ['Arrival', 'Ceremony', 'Reception', 'Send-off'],
+      title: 'Gift Corner',
+      body:
+        'Your presence is the greatest gift we could ask for. Should you wish to bless us further, a small gift or a contribution to our honeymoon fund would be deeply appreciated; a QR code will be provided for your convenience.',
+        imageSrc: '/qr.jpg',
     },
   },
 ];
@@ -102,11 +118,27 @@ const CARDS: InfoCard[] = [
 export default function GeneralInfoSection() {
   const [open, setOpen] = React.useState(false);
   const [active, setActive] = React.useState<InfoCard | null>(null);
+  const [viewerSrc, setViewerSrc] = React.useState<string | null>(null);
 
   const onCardClick = (card: InfoCard) => {
     setActive(card);
     setOpen(true);
   };
+
+  React.useEffect(() => {
+    if (!open) setViewerSrc(null);
+  }, [open]);
+
+  React.useEffect(() => {
+    if (!viewerSrc) return;
+
+    const onKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') setViewerSrc(null);
+    };
+
+    window.addEventListener('keydown', onKeyDown);
+    return () => window.removeEventListener('keydown', onKeyDown);
+  }, [viewerSrc]);
 
   return (
     <section
@@ -154,9 +186,48 @@ export default function GeneralInfoSection() {
       >
         {active ? (
           <div className="text-[#44624a]">
-            <p className="text-sm leading-relaxed text-[#44624a]/80">
+            <p className="whitespace-pre-line text-sm leading-relaxed text-[#44624a]/80">
               {active.details.body}
             </p>
+
+            {active.details.linkHref ? (
+              <div className="mt-4 flex justify-center">
+                <a
+                  href={active.details.linkHref}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="inline-flex items-center justify-center rounded-full bg-[#44624a]/10 px-5 py-2 text-xs font-semibold tracking-[0.22em] text-[#44624a] transition-colors hover:bg-[#44624a]/15"
+                >
+                  {active.details.linkLabel ?? 'OPEN LINK'}
+                </a>
+              </div>
+            ) : null}
+
+            {active.id === 'dress-code' ? (
+              <div className="mt-5 flex flex-col items-center justify-center gap-3">
+                <button
+                  type="button"
+                  onClick={() => setViewerSrc('/Men.jpg')}
+                  className="w-full max-w-xs rounded-full bg-[#44624a]/10 px-5 py-2 text-xs font-semibold tracking-[0.22em] text-[#44624a] transition-colors hover:bg-[#44624a]/15"
+                >
+                  MEN
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setViewerSrc('/girl.jpg')}
+                  className="w-full max-w-xs rounded-full bg-[#44624a]/10 px-5 py-2 text-xs font-semibold tracking-[0.22em] text-[#44624a] transition-colors hover:bg-[#44624a]/15"
+                >
+                  WOMEN
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setViewerSrc('/colorcode.jpg')}
+                  className="w-full max-w-xs rounded-full bg-[#44624a]/10 px-5 py-2 text-xs font-semibold tracking-[0.22em] text-[#44624a] transition-colors hover:bg-[#44624a]/15"
+                >
+                  COLOR CODE
+                </button>
+              </div>
+            ) : null}
 
             {active.details.bullets?.length ? (
               <ul className="mt-4 list-disc space-y-2 pl-5 text-sm text-[#44624a]/80">
@@ -166,7 +237,19 @@ export default function GeneralInfoSection() {
               </ul>
             ) : null}
 
-            <div className="mt-6 flex justify-end">
+            <div className="mt-6 flex items-center justify-between gap-3">
+              {active.details.imageSrc ? (
+                <button
+                  type="button"
+                  onClick={() => setViewerSrc(active.details.imageSrc ?? null)}
+                  className="rounded-full bg-[#44624a]/10 px-5 py-2 text-xs font-semibold tracking-[0.22em] text-[#44624a] transition-colors hover:bg-[#44624a]/15"
+                >
+                  VIEW IMAGE
+                </button>
+              ) : (
+                <span />
+              )}
+
               <button
                 type="button"
                 onClick={() => setOpen(false)}
@@ -175,6 +258,46 @@ export default function GeneralInfoSection() {
                 CLOSE
               </button>
             </div>
+
+            {viewerSrc ? (
+              <div
+                className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/80 p-4"
+                role="dialog"
+                aria-label="Image viewer"
+                onClick={() => setViewerSrc(null)}
+              >
+                <div
+                  className="w-full max-w-5xl"
+                  onClick={(e) => e.stopPropagation()}
+                >
+                  <a href={viewerSrc} download className="block">
+                    <img
+                      src={viewerSrc}
+                      alt={active.details.title}
+                      className="mx-auto max-h-[80vh] w-full rounded-2xl object-contain"
+                    />
+                  </a>
+
+                  <div className="mt-4 flex flex-wrap justify-center gap-3">
+                    <a
+                      href={viewerSrc}
+                      download
+                      className="rounded-full bg-white/90 px-6 py-2 text-xs font-semibold tracking-[0.22em] text-[#44624a] shadow-sm"
+                    >
+                      DOWNLOAD
+                    </a>
+                    <button
+                      type="button"
+                      onClick={() => setViewerSrc(null)}
+                      className="rounded-full bg-white/90 px-6 py-2 text-xs font-semibold tracking-[0.22em] text-[#44624a] shadow-sm"
+                      aria-label="Close image viewer"
+                    >
+                      CLOSE
+                    </button>
+                  </div>
+                </div>
+              </div>
+            ) : null}
           </div>
         ) : null}
       </BottomSheet>

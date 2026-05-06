@@ -4,54 +4,43 @@ import { FaqAccordion, type FaqItem } from '@/components/ui/faq-accordion';
 
 const FAQS: FaqItem[] = [
 	{
-		question: 'Will everyone be able to attend the wedding ceremony?',
-		answer:
-			"Our civil ceremony will be held at the court with limited seating, so only a small group of immediate family and selected guests will be present.\n\nWe’re excited to celebrate with everyone during the reception, where all our invited guests are welcome!",
-	},
-	{
-		question: 'What is the theme of the wedding?',
-		answer:
-			'Our wedding theme is [insert theme, e.g., minimalist, garden, modern elegance].\n\nWe’ve chosen a style that reflects us, and you’ll see it come to life during the celebration.',
-	},
-	{
-		question: 'How do I get to the venue?',
-		answer:
-			'For the ceremony, it will take place at [court name & location] (private and limited attendance).\n\nThe reception venue is at [venue name & address].\n\nYou can get there via:\n• Private car (parking available at [details])\n• Ride-hailing apps (Grab, etc.)\n• [Optional: Embed Google Maps link]',
-	},
-	{
-		question: 'Do you have a gift registry?',
-		answer:
-			'Your presence at our celebration is already a big gift to us.\n\nHowever, if you’d like to give something, we would truly appreciate [cash gifts / monetary blessings / registry link] as we start our new chapter together.',
-	},
-	{
-		question: 'What is the dress code?',
-		answer:
-			'We kindly ask our guests to come in [insert dress code: semi-formal, formal, etc.].\n\nPreferred colors: [optional color palette]\n\nWe’d love everyone to dress comfortably while still matching the vibe of the celebration.',
-	},
-	{
 		question: 'Can I bring a plus one?',
 		answer:
-			'Due to limited capacity at the venue, we can only accommodate guests who are specifically listed on the invitation.\n\nThank you for understanding!',
+			'We are thrilled to celebrate with you! To keep our gathering close and intimate, we kindly request that guests attend as invited, without a plus-one.',
 	},
 	{
-		question: 'Are kids allowed?',
+		question: 'What time should we arrive?',
 		answer:
-			'We love your little ones, but our event will be [adults-only / kid-friendly—choose one].\n\nWe hope this gives everyone a chance to relax and enjoy the celebration.',
+			'Please be there at 9:30 AM—let’s make the most of this special day together.',
 	},
 	{
-		question: 'What is the schedule for the day?',
+		question: 'Can we bring our kids to the wedding?',
 		answer:
-			'Here’s a quick overview of our wedding day:\n• Civil Ceremony (Private): [time]\n• Reception Starts: [time]\n• Program & Dinner: [time]\n• Celebration Proper: [time]\n\n(You can check the full timeline in the Day of Schedule section.)',
+			'As much as we love and adore your little ones, we are hoping to keep our celebration as intimate and adults-only as possible. We understand, however, that in certain circumstances this may not be possible.',
 	},
 	{
-		question: 'What time should I arrive at the reception?',
-		answer:
-			'We recommend arriving at least 15–30 minutes before the reception starts so you don’t miss any part of the program.',
+		question: 'Are there parking lots available in the area?',
+		answer: 'Parking is available inside the garden as soon as you arrive.',
 	},
 	{
-		question: 'Who can I contact for questions?',
+		question: 'Can I sit wherever I want?',
 		answer:
-			'If you have any questions or need assistance, feel free to reach out to:\n[Name + Contact Info]',
+			'We have prepared a seating plan for the reception. Don’t worry! We’ve arranged it thoughtfully so you’ll be surrounded by good vibes and even better company.',
+	},
+	{
+		question: 'Is RSVP really important?',
+		answer:
+			'Yes, confirming your RSVP is important to us. It helps us finalize the headcounts for meals and make sure everyone has a comfortable seat.',
+	},
+	{
+		question: 'Did you say “YES” but have a change of plans?',
+		answer:
+			'We would truly love to celebrate with you, but we understand that unexpected things can happen.\n\nIf you’re unable to join us, please let us know at the soonest so we can thoughtfully reallocate your seats.',
+	},
+	{
+		question: 'Did you say “NO” but can now attend?',
+		answer:
+			'We’re so happy you’re able to join us! Please let us know as soon as possible so we can check if seats are still available.\n\nIf any open up, we’ll let you know right away. Just kindly note that we may not be able to guarantee the same number of seats– or any at all– since some may have already been reassigned, but we truly hope to have you with us.',
 	},
 ];
 

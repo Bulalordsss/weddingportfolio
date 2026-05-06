@@ -9,10 +9,10 @@ type TimelineItem = {
 };
 
 const TIMELINE: TimelineItem[] = [
-  { time: '4:00 PM', title: 'CALL TIME' },
-  { time: '4:30 PM', title: 'WEDDING CEREMONY' },
-  { time: '6:00 PM', title: 'RECEPTION' },
-  { time: '9:00 PM', title: 'CLOSING CEREMONY' },
+  { time: '9:00 AM', title: 'CALL TIME' },
+  { time: '10:00 AM', title: 'WEDDING CEREMONY' },
+  { time: '12:30 PM', title: 'RECEPTION' },
+  { time: '4:00 PM', title: 'CLOSING CEREMONY' },
 ];
 
 export default function VenueSection() {
@@ -46,8 +46,8 @@ export default function VenueSection() {
                     Still does not crop (object-contain).
                   */}
                   <Image
-                    src="/samplevenue.jpg"
-                    alt="Cecil Green Park House venue"
+                    src="/verdeli.jpg"
+                    alt="Verdeli Garden & Cafe venue"
                     width={1600}
                     height={700}
                     priority
@@ -59,10 +59,10 @@ export default function VenueSection() {
               {/* Text + timeline */}
               <div className="text-center">
                 <h2 className="font-serif text-4xl tracking-[-0.05em] text-[#44624a] sm:text-5xl">
-                  Cecil Green Park House
+                  Verdeli Garden & Cafe
                 </h2>
                 <p className="mt-3 text-[11px] font-semibold tracking-[0.32em] text-[#44624a]/60 sm:text-[12px]">
-                  6251 CECIL GREEN PARK RD, VANCOUVER, BC V6T 1Z1, CANADA
+                  Purok 3B Brgy, Calinan, Baguio District, Davao City
                 </p>
 
                 <div className="mt-10">
