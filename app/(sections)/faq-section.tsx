@@ -11,12 +11,12 @@ const FAQS: FaqItem[] = [
 	{
 		question: 'What time should we arrive?',
 		answer:
-			'Please be there at 9:30 AM—let’s make the most of this special day together.',
+			'Please be there at 9:00 AM—let’s make the most of this special day together.',
 	},
 	{
 		question: 'Can we bring our kids to the wedding?',
 		answer:
-			'As much as we love and adore your little ones, we are hoping to keep our celebration as intimate and adults-only as possible. We understand, however, that in certain circumstances this may not be possible.',
+			'As much as we love and adore your little ones, we are hoping to keep our celebration as intimate and adults-only as possible.',
 	},
 	{
 		question: 'Are there parking lots available in the area?',

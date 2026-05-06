@@ -25,20 +25,19 @@ const CARDS: InfoCard[] = [
   {
     id: 'ceremony',
     imageUrl:
-      '/hero5.jpg',
+      '/ceremony.png',
     location: 'The Ceremony',
     stats: 'Families & witnesses only',
     themeColor: '150 45% 25%',
     details: {
       title: 'The Ceremony',
       body:
-        'We lovingly share that our ceremony will be a quiet and intimate moment, held in the presence of our closest family and chosen witnesses. Though the ceremony itself is private, it would truly mean so much to us to celebrate with you at the reception where we can gather, share joy, and create beautiful memories together. Thank you for your understanding and for being part of our hearts on this special day.',
-      bullets: ['Families and witnesses only'],
+        'We lovingly share that our ceremony will be held in a garden, in a quiet and intimate setting, surrounded by all the dear guests who have received this invitation. It would truly mean so much to us to celebrate this special moment with you, and to continue the joy at the reception as we gather, share laughter, and create beautiful memories together. Thank you for being part of our hearts on this meaningful day.',
     },
   },
   {
     id: 'celebration',
-    imageUrl: '/verdeli.jpg',
+    imageUrl: '/celebration.png',
     location: 'The Celebration',
     stats: 'Venue details',
     themeColor: '190 55% 28%',
@@ -55,7 +54,7 @@ const CARDS: InfoCard[] = [
   {
     id: 'timeline',
     imageUrl:
-      '/party.png',
+      '/timeline.png',
     location: 'Timeline of Events',
     stats: 'Wedding schedule',
     themeColor: '30 70% 28%',
@@ -95,8 +94,8 @@ const CARDS: InfoCard[] = [
     details: {
       title: 'Dress Code',
       body:
-        'We kindly encourage our favorite people to join us in semi-formal attire. Your thoughtful coordination will help create a beautiful and cohesive atmosphere for our special day.\n\nPlease be guided below.\n\nWhite is reserved for the bride - thank you for understanding.',
-      bullets: ['Semi-formal attire', 'Please be guided below', 'White is reserved for the bride'],
+        'We kindly encourage our favorite people to join us in semi-formal attire. Your thoughtful coordination will help create a beautiful and cohesive atmosphere for our special day.\n\nPlease be guided below.',
+      bullets: ['Semi-formal attire,','White is reserved for the bride - thank you for understanding.'],
     },
   },
   {
@@ -221,7 +220,7 @@ export default function GeneralInfoSection() {
                 </button>
                 <button
                   type="button"
-                  onClick={() => setViewerSrc('/colorcode.jpg')}
+                  onClick={() => setViewerSrc('/colorcode.png')}
                   className="w-full max-w-xs rounded-full bg-[#44624a]/10 px-5 py-2 text-xs font-semibold tracking-[0.22em] text-[#44624a] transition-colors hover:bg-[#44624a]/15"
                 >
                   COLOR CODE
