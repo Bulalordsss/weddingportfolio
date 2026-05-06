@@ -27,7 +27,7 @@ const CARDS: InfoCard[] = [
     imageUrl:
       '/ceremony.png',
     location: 'The Ceremony',
-    stats: 'Families & witnesses only',
+    stats: 'Garden Wedding',
     themeColor: '150 45% 25%',
     details: {
       title: 'The Ceremony',
@@ -95,7 +95,7 @@ const CARDS: InfoCard[] = [
       title: 'Dress Code',
       body:
         'We kindly encourage our favorite people to join us in semi-formal attire. Your thoughtful coordination will help create a beautiful and cohesive atmosphere for our special day.\n\nPlease be guided below.',
-      bullets: ['Semi-formal attire,','White is reserved for the bride - thank you for understanding.'],
+      bullets: ['Semi-formal attire,','White is reserved for the bride & groom - thank you for understanding.'],
     },
   },
   {
